@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JasaKu</title>
+
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+
+  <div class="location">
+    📍 Medan
+  </div>
+
+  <h1>Halo 👋</h1>
+
+  <p class="hero-text">
+    Butuh Jasa Apa Hari Ini?
+  </p>
+
+</header>
+
+  <section class="search-box">
+    <input type="text" placeholder="Cari jasa...">
+    <button>Cari</button>
+  </section>
+
+  <div class="running-text">
+
+  <div class="running-icon">
+  <i class="fas fa-bullhorn"></i>
+</div>
+
+  <div class="running-content">
+
+    <div class="running-track">
+
+      Gratis Survey CCTV •
+      Diskon Instalasi Listrik Hingga 30% •
+      Promo Service AC Diskon 20% •
+      Teknisi Terdekat Siap Datang •
+
+    </div>
+
+  </div>
+
+</div>
+
+  <section class="slider">
+
+  <div class="slides">
+
+    <div class="slide active">
+      <h3>🎉 Promo Service AC</h3>
+      <p>Diskon hingga 30%</p>
+
+       <button class="promo-btn">
+    Lihat Promo
+  </button>
+    </div>
+
+    <div class="slide">
+      <h3>⚡ Promo Listrik</h3>
+      <p>Gratis Survey Instalasi</p>
+
+       <button class="promo-btn">
+    Lihat Promo
+  </button>
+    </div>
+
+    <div class="slide">
+      <h3>📹 Promo CCTV</h3>
+      <p>Diskon Pemasangan Baru</p>
+
+       <button class="promo-btn">
+    Lihat Promo
+  </button>
+    </div>
+
+    <div class="slide">
+      <h3>💻 Service Komputer</h3>
+      <p>Mulai Rp50.000</p>
+
+       <button class="promo-btn">
+    Lihat Promo
+  </button>
+    </div>
+
+  </div>
+
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+</section>
+
+  <h2 class="section-title">
+  Kategori Populer
+  </h2>
+
+  <section class="kategori">
+
+    <div class="card">
+      🔧
+      <span>Service AC</span>
+    </div>
+
+    <div class="card">
+      ⚡
+      <span>Listrik</span>
+    </div>
+
+    <div class="card">
+      💻
+      <span>Komputer</span>
+    </div>
+
+    <div class="card">
+      📹
+      <span>CCTV</span>
+    </div>
+
+  </section>
+
+<section class="provider-section">
+
+  <h2 class="section-title">
+    Penyedia Jasa Terdekat
+  </h2>
+
+  <div class="provider-card">
+
+    <div class="provider-info">
+      <h3>Ahmad Service AC</h3>
+      <p>⭐ 4.9</p>
+      <p>Mulai Rp100.000</p>
+    </div>
+
+    <button class="btn-pesan">
+      Pesan
+    </button>
+
+  </div>
+
+  <div class="provider-card">
+
+    <div class="provider-info">
+      <h3>Budi Listrik</h3>
+      <p>⭐ 4.8</p>
+      <p>Mulai Rp80.000</p>
+    </div>
+
+    <button class="btn-pesan">
+      Pesan
+    </button>
+
+  </div>
+
+</section>
+
+<nav class="bottom-nav">
+
+  <a href="#" class="nav-item active">
+    <span>🏠</span>
+    <small>Beranda</small>
+  </a>
+
+  <a href="#" class="nav-item">
+    <span>🔍</span>
+    <small>Cari</small>
+  </a>
+
+  <a href="#" class="nav-item">
+    <span>📋</span>
+    <small>Pesanan</small>
+  </a>
+
+  <a href="#" class="nav-item">
+    <span>👤</span>
+    <small>Akun</small>
+  </a>
+
+</nav>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
