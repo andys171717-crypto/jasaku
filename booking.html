@@ -127,62 +127,37 @@ supabaseKey
 
 async function simpanPesanan(){
 
-alert('Fungsi berjalan');
-
-return;
-
-const nama =
-document.getElementById('nama').value;
-
-const hp =
-document.getElementById('hp').value;
-
-const tanggal =
-document.getElementById('tanggal').value;
-
-const jam =
-document.getElementById('jam').value;
-
-const alamat =
-document.getElementById('alamat').value;
-
-const keluhan =
-document.getElementById('keluhan').value;
-
-const { error } =
+const { data, error } =
 await supabase
 .from('orders')
 .insert([
 {
-tanggal,
-jam,
-alamat,
-keluhan
+alamat:'TES'
 }
-]);
+])
+.select();
 
 if(error){
 
 alert(
-'Gagal menyimpan pesanan'
+'ERROR: ' + error.message
 );
 
 console.log(error);
 
-return;
-
-}
+}else{
 
 alert(
-'Pesanan berhasil dibuat'
+'INSERT BERHASIL'
 );
 
-window.location.href =
-'pesanan.html';
+console.log(data);
 
 }
 
-</script> 
+}
+
+</script>
   
 
 </body>
