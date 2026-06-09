@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<div id="ordersContainer">
-LOADING...
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -13,7 +5,13 @@ LOADING...
 document.getElementById("ordersContainer").innerHTML =
 "STEP 1";
 
-</script>
+const supabase =
+window.supabase.createClient(
+'https://rffgjgobkqncesvkwkaq.supabase.co',
+'sb_publishable_YWoIjIR0d8nvxYGOjixNhA_-2kgr7DP'
+);
 
-</body>
-</html>
+document.getElementById("ordersContainer").innerHTML =
+"STEP 2";
+
+</script>
