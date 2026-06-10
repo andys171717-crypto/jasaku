@@ -67,8 +67,6 @@ cursor:pointer;
 
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
 <body>
   
@@ -116,75 +114,79 @@ Konfirmasi Pesanan
 
 </div>
   
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-const supabaseUrl =
-'https://rffgjgobkqncesvkwkaq.supabase.co';
+<script type="module">
 
-const supabaseKey =
-'sb_publishable_YWoIjIR0d8nvxYGOjixNhA_-2kgr7DP';
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279",
+measurementId: "G-M44C84XF1E"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 document
-.getElementById('btnPesan')
-.addEventListener(
-'click',
-simpanPesanan
-);
+.getElementById("btnPesan")
+.addEventListener("click", simpanPesanan);
 
 async function simpanPesanan(){
 
-const supabase =
-window.supabase.createClient(
-supabaseUrl,
-supabaseKey
-);
-
 const nama =
-document.getElementById('nama').value;
+document.getElementById("nama").value;
 
 const hp =
-document.getElementById('hp').value;
+document.getElementById("hp").value;
 
 const tanggal =
-document.getElementById('tanggal').value;
+document.getElementById("tanggal").value;
 
 const jam =
-document.getElementById('jam').value;
+document.getElementById("jam").value;
 
 const alamat =
-document.getElementById('alamat').value;
+document.getElementById("alamat").value;
 
 const keluhan =
-document.getElementById('keluhan').value;
+document.getElementById("keluhan").value;
 
-const { error } =
-await supabase
-.from('orders')
-.insert([
+try{
+
+await addDoc(
+collection(db,"orders"),
 {
+nama,
+hp,
 tanggal,
 jam,
 alamat,
-keluhan
+keluhan,
+status:"Menunggu"
 }
-]);
-
-if(error){
-
-alert(
-'ERROR : ' +
-error.message
 );
 
-return;
+alert("Pesanan berhasil dibuat");
+
+}catch(error){
+
+alert(error.message);
 
 }
-
-alert(
-'Pesanan berhasil dibuat'
-);
 
 }
 
