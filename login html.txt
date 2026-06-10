@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - JasaKu</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+text-align:center;
+width:300px;
+}
+
+h1{
+color:#1e3a8a;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h1>JasaKu</h1>
+
+<p>Masuk dengan Google</p>
+
+<button id="btnLogin">
+Login Google
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider =
+new GoogleAuthProvider();
+
+document
+.getElementById("btnLogin")
+.addEventListener("click", loginGoogle);
+
+async function loginGoogle(){
+
+try{
+
+const result =
+await signInWithPopup(
+auth,
+provider
+);
+
+alert(
+"Login berhasil: " +
+result.user.displayName
+);
+
+window.location.href =
+"index.html";
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
