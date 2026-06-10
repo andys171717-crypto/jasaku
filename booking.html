@@ -114,8 +114,6 @@ Konfirmasi Pesanan
 
 </div>
   
-<script>
-
 <script type="module">
 
 import { initializeApp }
@@ -141,6 +139,8 @@ measurementId: "G-M44C84XF1E"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+console.log("Firebase aktif");
+
 document
 .getElementById("btnPesan")
 .addEventListener("click", simpanPesanan);
@@ -164,6 +164,17 @@ document.getElementById("alamat").value;
 
 const keluhan =
 document.getElementById("keluhan").value;
+
+if(
+nama.trim() === "" ||
+hp.trim() === "" ||
+tanggal.trim() === "" ||
+jam.trim() === "" ||
+alamat.trim() === ""
+){
+alert("Semua data wajib diisi");
+return;
+}
 
 try{
 
