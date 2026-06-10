@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Jasa</title>
+  
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f6fa;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:20px;
+}
+
+input,
+textarea{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h2>Tambah Jasa</h2>
+
+<input id="namaJasa" placeholder="Nama Jasa">
+
+<input id="kategori" placeholder="Kategori">
+
+<input id="harga" placeholder="Harga">
+
+<input id="kota" placeholder="Kota">
+
+<textarea
+id="deskripsi"
+placeholder="Deskripsi">
+</textarea>
+
+<button id="btnSimpan">
+Simpan Jasa
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document
+.getElementById("btnSimpan")
+.addEventListener("click", simpanJasa);
+
+async function simpanJasa(){
+
+const namaJasa =
+document.getElementById("namaJasa").value;
+
+const kategori =
+document.getElementById("kategori").value;
+
+const harga =
+document.getElementById("harga").value;
+
+const kota =
+document.getElementById("kota").value;
+
+const deskripsi =
+document.getElementById("deskripsi").value;
+
+await addDoc(
+collection(db,"services"),
+{
+namaJasa,
+kategori,
+harga,
+kota,
+deskripsi
+}
+);
+
+alert("Jasa berhasil ditambahkan");
+
+}
+
+</script>
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+🏠
+<small>Beranda</small>
+</a>
+
+<a href="#" class="nav-item">
+🔍
+<small>Cari</small>
+</a>
+
+<a href="pesanan.html" class="nav-item">
+📋
+<small>Pesanan</small>
+</a>
+
+<a href="akun.html" class="nav-item">
+👤
+<small>Akun</small>
+</a>
+
+</nav>
+
+
+</body>
+</html>
