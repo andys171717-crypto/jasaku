@@ -101,7 +101,7 @@ color:white;
 🔧
 </div>
 
-<h2>Ahmad Service AC</h2>
+<h2 id="namaJasa">Loading...</h2>
 
 <div class="rating">
 ⭐ 4.9 (120 Review)
@@ -128,8 +128,8 @@ Medan Johor, Medan Helvetia
 
 <h3>Harga Mulai</h3>
 
-<p>
-Rp100.000
+<p id="harga">
+Loading...
 </p>
 
 </div>
@@ -138,11 +138,8 @@ Rp100.000
 
 <h3>Tentang Teknisi</h3>
 
-<p>
-Spesialis service AC rumah,
-kantor, isi freon, cuci AC,
-perbaikan AC tidak dingin,
-berpengalaman sejak 2018.
+<p id="deskripsi">
+Loading...
 </p>
 
 </div>
@@ -160,6 +157,89 @@ Pesan Sekarang
 </button>
 
 </div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const serviceId =
+params.get("id");
+
+async function loadDetail(){
+
+if(!serviceId){
+alert("Service tidak ditemukan");
+return;
+}
+
+const serviceRef =
+doc(
+db,
+"services",
+serviceId
+);
+
+const serviceSnap =
+await getDoc(serviceRef);
+
+if(serviceSnap.exists()){
+
+const data =
+serviceSnap.data();
+
+document.getElementById(
+"namaJasa"
+).innerText =
+data.namaJasa;
+
+document.getElementById(
+"harga"
+).innerText =
+"Rp " + data.harga;
+
+document.getElementById(
+"deskripsi"
+).innerText =
+data.deskripsi;
+
+}else{
+
+alert(
+"Data jasa tidak ditemukan"
+);
+
+}
+
+}
+
+loadDetail();
+
+</script>
 
 </body>
 </html>
