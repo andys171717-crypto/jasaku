@@ -17,7 +17,9 @@
     📍 Medan
   </div>
 
-  <h1>Halo 👋</h1>
+  <h1 id="headerUser">
+Halo 👋
+</h1>
 
   <p class="hero-text">
     Butuh Jasa Apa Hari Ini?
@@ -236,6 +238,29 @@ Lihat
 });
 
 }
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const auth = getAuth(app);
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+document.getElementById(
+"headerUser"
+).innerText =
+"Halo " +
+user.displayName +
+" 👋";
+
+}
+
+});
 
 loadServices();
 
