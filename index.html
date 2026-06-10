@@ -132,39 +132,15 @@
 
 <section class="provider-section">
 
-  <h2 class="section-title">
-    Penyedia Jasa Terdekat
-  </h2>
+<h2 class="section-title">
+Penyedia Jasa Terdekat
+</h2>
 
-  <div class="provider-card">
-
-    <div class="provider-info">
-      <h3>Ahmad Service AC</h3>
-      <p>⭐ 4.9</p>
-      <p>Mulai Rp100.000</p>
-    </div>
-
-    <a href="detail.html" class="btn-pesan">
-Pesan
-</a>
-
-  </div>
-
-  <div class="provider-card">
-
-    <div class="provider-info">
-      <h3>Budi Listrik</h3>
-      <p>⭐ 4.8</p>
-      <p>Mulai Rp80.000</p>
-    </div>
-
-    <a href="detail.html" class="btn-pesan">
-Pesan
-</a>
-
-  </div>
+<div id="servicesList">
+</div>
 
 </section>
+
 
 <nav class="bottom-nav">
 
@@ -193,6 +169,75 @@ Pesan
 </nav>
 
 <script src="script.js"></script>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadServices(){
+
+const container =
+document.getElementById("servicesList");
+
+const snapshot =
+await getDocs(
+collection(db,"services")
+);
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+container.innerHTML += `
+
+<div class="provider-card">
+
+<div class="provider-info">
+
+<h3>${data.namaJasa}</h3>
+
+<p>${data.kategori}</p>
+
+<p>Rp ${data.harga}</p>
+
+</div>
+
+<a href="detail.html"
+class="btn-pesan">
+Lihat
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadServices();
+
+</script>
 
 
 </body>
