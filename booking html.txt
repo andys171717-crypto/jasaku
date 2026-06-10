@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Jasa - JasaKu</title>
+
+<style>
+
+body{
+margin:0;
+background:#f5f7fb;
+font-family:Arial,sans-serif;
+}
+
+.booking-header{
+background:#1e3a8a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.booking-card{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+font-size:14px;
+box-sizing:border-box;
+}
+
+.form-group textarea{
+height:100px;
+resize:none;
+}
+
+.booking-btn{
+width:100%;
+background:#2563eb;
+color:white;
+border:none;
+padding:15px;
+border-radius:14px;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+  
+<div class="booking-header">
+<h1>Booking Jasa</h1>
+</div>
+
+<div class="booking-card">
+
+<div class="form-group">
+<label>Nama Lengkap</label>
+<input type="text" id="nama">
+</div>
+
+<div class="form-group">
+<label>Nomor HP</label>
+<input type="tel" id="hp">
+</div>
+
+<div class="form-group">
+<label>Tanggal Booking</label>
+<input type="date" id="tanggal">
+</div>
+
+<div class="form-group">
+<label>Jam Booking</label>
+<input type="time" id="jam">
+</div>
+
+<div class="form-group">
+<label>Alamat</label>
+<textarea id="alamat"></textarea>
+</div>
+
+<div class="form-group">
+<label>Keluhan</label>
+<textarea id="keluhan"></textarea>
+</div>
+
+<button
+class="booking-btn"
+id="btnPesan">
+Konfirmasi Pesanan
+</button>
+
+</div>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseUrl =
+'https://rffgjgobkqncesvkwkaq.supabase.co';
+
+const supabaseKey =
+'sb_publishable_YWoIjIR0d8nvxYGOjixNhA_-2kgr7DP';
+
+document
+.getElementById('btnPesan')
+.addEventListener(
+'click',
+simpanPesanan
+);
+
+async function simpanPesanan(){
+
+const supabase =
+window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+const nama =
+document.getElementById('nama').value;
+
+const hp =
+document.getElementById('hp').value;
+
+const tanggal =
+document.getElementById('tanggal').value;
+
+const jam =
+document.getElementById('jam').value;
+
+const alamat =
+document.getElementById('alamat').value;
+
+const keluhan =
+document.getElementById('keluhan').value;
+
+const { error } =
+await supabase
+.from('orders')
+.insert([
+{
+tanggal,
+jam,
+alamat,
+keluhan
+}
+]);
+
+if(error){
+
+alert(
+'ERROR : ' +
+error.message
+);
+
+return;
+
+}
+
+alert(
+'Pesanan berhasil dibuat'
+);
+
+}
+
+</script>
+  
+  
+</body>
+</html>
