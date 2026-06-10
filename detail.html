@@ -151,8 +151,8 @@ Loading...
 </button>
 
 <button
-class="order-btn"
-onclick="location.href='booking.html'">
+id="btnPesan"
+class="order-btn">
 Pesan Sekarang
 </button>
 
@@ -239,7 +239,18 @@ alert(
 
 loadDetail();
 
+document
+.getElementById("btnPesan")
+.addEventListener("click",()=>{
+
+window.location.href =
+"booking.html?id=" +
+serviceId;
+
+});
+
 </script>
+
 
 </body>
 </html>
