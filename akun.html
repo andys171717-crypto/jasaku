@@ -10,9 +10,17 @@
 <style>
 
 .profile-header{
-background:#1e3a8a;
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#6366f1
+);
+
 color:white;
-padding:30px 20px;
+
+padding:24px 20px;
+
 text-align:center;
 }
 
@@ -163,7 +171,9 @@ Login Google
 
 </div>
 
-<div class="menu-card">
+<div
+class="menu-card"
+id="menuCard">
 
 <a href="pesanan.html" class="menu-item">
 📋 Pesanan Saya
@@ -352,6 +362,11 @@ auth,
 if(user){
 
 document.getElementById(
+"menuCard"
+).style.display =
+"block";  
+
+document.getElementById(
 "namaUser"
 ).innerText =
 user.displayName;
@@ -383,6 +398,11 @@ document.getElementById(
 "none";
 
 }else{
+
+document.getElementById(
+"menuCard"
+).style.display =
+"none";  
 
 document.getElementById(
 "namaUser"
