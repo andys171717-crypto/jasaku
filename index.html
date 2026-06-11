@@ -183,14 +183,99 @@ Penyedia Jasa Terdekat
   </a>
 
   
-<a href="akun.html" class="nav-item">
-    <span>👤</span>
-    <small>Akun</small>
-  </a>
+<a
+href="#"
+id="btnAkun"
+class="nav-item">
+
+<span>👤</span>
+
+<small>Akun</small>
+
+</a>
 
 </nav>
 
+<div id="loginModal">
+
+<div class="login-overlay"></div>
+
+<div class="login-popup">
+
+<div class="popup-avatar">
+G
+</div>
+
+<h2>
+Halo Guest
+</h2>
+
+<p>
+Masuk untuk melihat pesanan,
+favorit dan layanan lainnya
+</p>
+
+<button id="popupLogin">
+Login
+</button>
+
+<button id="popupDaftar">
+Daftar
+</button>
+
+<button id="popupGoogle">
+Google
+</button>
+
+</div>
+
+</div>
+
 <script src="script.js"></script>
+
+<script>
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+const btnAkun =
+document.getElementById(
+"btnAkun"
+);
+
+const modal =
+document.getElementById(
+"loginModal"
+);
+
+btnAkun.addEventListener(
+"click",
+(e)=>{
+
+e.preventDefault();
+
+modal.style.display =
+"block";
+
+}
+);
+
+document.querySelector(
+".login-overlay"
+).addEventListener(
+"click",
+()=>{
+
+modal.style.display =
+"none";
+
+}
+);
+
+});
+
+</script>
 
 <script type="module">
 
