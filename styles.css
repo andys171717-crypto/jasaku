@@ -794,8 +794,71 @@ color:white;
 }
 
 #popupGoogle{
-background:#f8fafc;
-color:#0f172a;
+background:white;
 
-border:1px solid #e2e8f0;
+border:1px solid #dbe2ea;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:12px;
+
+color:#334155;
+
+font-weight:600;
+
+cursor:pointer;
+}
+
+#popupGoogle img{
+width:20px;
+height:20px;
+}
+
+.close-modal{
+position:absolute;
+
+top:14px;
+right:14px;
+
+width:32px;
+height:32px;
+
+border:none;
+
+background:#f1f5f9;
+
+border-radius:50%;
+
+cursor:pointer;
+
+font-size:16px;
+
+font-weight:bold;
+}
+
+.login-popup{
+animation:
+popupShow .25s ease;
+}
+
+@keyframes popupShow{
+
+from{
+opacity:0;
+
+transform:
+translate(-50%,-45%)
+scale(.95);
+}
+
+to{
+opacity:1;
+
+transform:
+translate(-50%,-50%)
+scale(1);
+}
+
 }
