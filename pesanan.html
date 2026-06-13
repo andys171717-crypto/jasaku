@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesanan Saya - JasaKu</title>
+  
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+.order-header{
+background:#1e3a8a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.order-card{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.status{
+display:inline-block;
+background:#fef3c7;
+color:#92400e;
+padding:8px 14px;
+border-radius:20px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.order-info{
+margin-top:15px;
+line-height:2;
+}
+
+.home-btn{
+display:block;
+margin:20px;
+text-align:center;
+background:#2563eb;
+color:white;
+padding:15px;
+border-radius:14px;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+<body style="display:none;">
+
+<div class="order-header">
+<h1>Pesanan Saya</h1>
+</div>
+
+<div id="ordersList"></div>
+
+<a href="index.html" class="home-btn">
+Kembali ke Beranda
+</a>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+query,
+where,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+async function loadOrders(userId){
+
+const container =
+document.getElementById("ordersList");
+
+container.innerHTML = "";
+
+const q =
+query(
+collection(db,"orders"),
+where(
+"userId",
+"==",
+userId
+)
+);
+
+const snapshot =
+await getDocs(q);
+
+if(snapshot.empty){
+
+container.innerHTML = `
+
+<div class="order-card">
+
+<h2>
+Belum Ada Pesanan
+</h2>
+
+<p>
+Pesanan Anda akan muncul di sini.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+snapshot.forEach((doc)=>{
+
+const data =
+doc.data();
+
+container.innerHTML += `
+
+<div class="order-card">
+
+<h2>${data.namaJasa}</h2>
+
+<div class="status">
+${data.status}
+</div>
+
+<div class="order-info">
+
+<p>
+<b>Tanggal:</b>
+${data.tanggal}
+</p>
+
+<p>
+<b>Jam:</b>
+${data.jam}
+</p>
+
+<p>
+<b>Harga:</b>
+Rp ${data.harga}
+</p>
+  
+<p>
+<b>Alamat:</b>
+${data.alamat}
+</p> 
+  
+<p>
+<b>Keluhan:</b>
+${data.keluhan}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+document.body.style.display =
+"block";
+
+if(!user){
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+loadOrders(
+user.uid
+);
+
+}
+);
+
+</script>
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+<i class="fa-solid fa-house"></i>
+<small>Beranda</small>
+</a>
+
+<a href="#" class="nav-item">
+<i class="fa-solid fa-magnifying-glass"></i>
+<small>Cari</small>
+</a>
+
+<a href="pesanan.html" class="nav-item active">
+<i class="fa-solid fa-clipboard-list"></i>
+<small>Pesanan</small>
+</a>
+
+<a href="akun.html" class="nav-item">
+<i class="fa-solid fa-user"></i>
+<small>Akun</small>
+</a>
+
+</nav>
+
+
+</body>
+</html>
