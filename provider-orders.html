@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesanan Masuk</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+body{
+background:#f5f6fa;
+font-family:Arial,sans-serif;
+margin:0;
+}
+
+.header{
+background:#1e3a8a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.order-card{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.status{
+display:inline-block;
+padding:8px 14px;
+border-radius:20px;
+background:#fef3c7;
+color:#92400e;
+font-weight:bold;
+margin-top:10px;
+}
+
+.order-info{
+margin-top:15px;
+line-height:1.8;
+}
+
+.action-buttons{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.btn-accept,
+.btn-reject{
+flex:1;
+border:none;
+padding:12px;
+border-radius:12px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.btn-accept{
+background:#16a34a;
+color:white;
+}
+
+.btn-reject{
+background:#dc2626;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+<h1>Pesanan Masuk</h1>
+</div>
+
+<div id="ordersList"></div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+query,
+where,
+getDocs,
+doc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+async function loadOrders(uid){
+
+const container =
+document.getElementById(
+"ordersList"
+);
+
+container.innerHTML = "";
+
+const q =
+query(
+collection(db,"orders"),
+where(
+"providerId",
+"==",
+uid
+)
+);
+
+const snapshot =
+await getDocs(q);
+
+if(snapshot.empty){
+
+container.innerHTML = `
+
+<div class="order-card">
+
+<h3>
+Belum Ada Pesanan Masuk
+</h3>
+
+</div>
+
+`;
+
+return;
+
+}
+
+snapshot.forEach(order=>{
+
+const data =
+order.data();
+
+container.innerHTML += `
+
+<div class="order-card">
+
+<h3>
+${data.namaJasa}
+</h3>
+
+<div class="status">
+${data.status}
+</div>
+
+<div class="order-info">
+
+<p>
+<b>Nama:</b>
+${data.nama}
+</p>
+
+<p>
+<b>HP:</b>
+${data.hp}
+</p>
+
+<p>
+<b>Alamat:</b>
+${data.alamat}
+</p>
+
+<p>
+<b>Keluhan:</b>
+${data.keluhan}
+</p>
+
+</div>
+
+<div class="action-buttons">
+
+<button
+class="btn-accept"
+data-id="${order.id}">
+Terima
+</button>
+
+<button
+class="btn-reject"
+data-id="${order.id}">
+Tolak
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+if(!user){
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+console.log("UID LOGIN:", user.uid);
+
+loadOrders(user.uid);
+
+}
+);
+
+document.addEventListener(
+"click",
+async(e)=>{
+
+if(
+e.target.classList.contains(
+"btn-accept"
+)
+){
+
+await updateDoc(
+doc(
+db,
+"orders",
+e.target.dataset.id
+),
+{
+status:"Diterima"
+}
+);
+
+location.reload();
+
+}
+
+if(
+e.target.classList.contains(
+"btn-reject"
+)
+){
+
+await updateDoc(
+doc(
+db,
+"orders",
+e.target.dataset.id
+),
+{
+status:"Ditolak"
+}
+);
+
+location.reload();
+
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
