@@ -7,47 +7,29 @@
   
 <link rel="stylesheet" href="styles.css">
 
-<style>
-
-body{
-font-family:Arial;
-background:#f5f6fa;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:20px;
-}
-
-input,
-textarea{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-box-sizing:border-box;
-}
-
-button{
-width:100%;
-padding:15px;
-background:#2563eb;
-color:white;
-border:none;
-border-radius:10px;
-}
-
-</style>
-
 </head>
 <body style="display:none;">
 
-<div class="card">
+<div class="service-page">
 
-<h2>Tambah Jasa</h2>
+<div class="service-header">
 
-<input id="namaJasa" placeholder="Nama Jasa">
+<h1>Tambah Jasa</h1>
+
+<p>
+Kelola layanan yang akan
+ditampilkan di JasaKu
+</p>
+
+</div>
+
+<div class="service-card">
+
+<label>Nama Jasa</label>
+
+<input id="namaJasa" placeholder="Contoh: Service AC">
+
+<label>Kategori</label>
 
 <select id="kategori">
 
@@ -82,18 +64,26 @@ id="subKategori"
 placeholder="Jenis Jasa"
 style="display:none;">
 
-<input id="harga" placeholder="Harga">
+<label>Harga</label>
 
-<input id="kota" placeholder="Kota">
+<input id="harga" placeholder="Contoh: 150000">
+
+<label>Kota</label>
+
+<input id="kota" placeholder="Contoh: Medan">
+
+<label>Deskripsi</label>
 
 <textarea
 id="deskripsi"
-placeholder="Deskripsi">
+placeholder="Jelaskan layanan Anda">
 </textarea>
 
 <button id="btnSimpan">
 Simpan Jasa
 </button>
+
+</div>
 
 </div>
 
