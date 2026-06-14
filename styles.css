@@ -1189,3 +1189,36 @@ box-shadow:
 0 15px 35px rgba(37,99,235,.35);
 
 }
+
+.active-category{
+
+background:linear-gradient(
+135deg,
+#2563eb,
+#6366f1
+);
+
+color:white;
+
+transform:translateY(-3px);
+
+box-shadow:
+0 12px 25px rgba(
+37,
+99,
+235,
+.25
+);
+
+}
+
+.active-category span{
+color:white;
+}
+
+.active-category i{
+background:
+rgba(255,255,255,.15) !important;
+
+color:white !important;
+}
