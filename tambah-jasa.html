@@ -203,14 +203,6 @@ const deskripsi =
 document.getElementById("deskripsi").value;
 
 if(
-namaJasa.trim()==="" ||
-kategori.trim()==="" ||
-harga.trim()==="" ||
-kota.trim()==="" ||
-deskripsi.trim()===""
-){
-
-if(
 kategori==="Lainnya" &&
 subKategori.trim()===""
 ){
@@ -221,7 +213,15 @@ alert(
 
 return;
 
-}  
+}
+
+if(
+namaJasa.trim()==="" ||
+kategori.trim()==="" ||
+harga.trim()==="" ||
+kota.trim()==="" ||
+deskripsi.trim()===""
+){
 
 alert(
 "Semua data wajib diisi"
@@ -229,7 +229,7 @@ alert(
 
 return;
 
-} 
+}
   
 try{
 
