@@ -1222,3 +1222,181 @@ rgba(255,255,255,.15) !important;
 
 color:white !important;
 }
+
+/* ===================
+TAMBAH JASA PREMIUM
+=================== */
+
+.service-page{
+
+padding:20px;
+
+}
+
+.service-header{
+
+text-align:center;
+
+margin-bottom:20px;
+
+}
+
+.service-header h1{
+
+font-size:28px;
+
+font-weight:800;
+
+color:#0f172a;
+
+margin-bottom:8px;
+
+}
+
+.service-header p{
+
+color:#64748b;
+
+font-size:14px;
+
+}
+
+.service-card{
+
+background:white;
+
+border-radius:24px;
+
+padding:20px;
+
+box-shadow:
+0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.service-card label{
+
+display:block;
+
+font-size:14px;
+
+font-weight:700;
+
+color:#334155;
+
+margin-bottom:8px;
+
+margin-top:14px;
+
+}
+
+.service-card input,
+.service-card textarea,
+.service-card select{
+
+width:100%;
+
+padding:14px;
+
+border:1px solid #e2e8f0;
+
+border-radius:16px;
+
+background:#f8fafc;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+.service-card textarea{
+
+min-height:120px;
+
+resize:none;
+
+}
+
+.service-card input:focus,
+.service-card textarea:focus,
+.service-card select:focus{
+
+border-color:#2563eb;
+
+box-shadow:
+0 0 0 3px
+rgba(37,99,235,.10);
+
+}
+
+#btnSimpan{
+
+width:100%;
+
+margin-top:24px;
+
+height:56px;
+
+border:none;
+
+border-radius:16px;
+
+font-size:15px;
+
+font-weight:700;
+
+color:white;
+
+background:linear-gradient(
+135deg,
+#2563eb,
+#6366f1
+);
+
+box-shadow:
+0 10px 25px rgba(
+37,
+99,
+235,
+.25
+);
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#btnSimpan:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 15px 35px rgba(
+37,
+99,
+235,
+.35
+);
+
+}
+
+
+.service-card select{
+
+appearance:none;
+
+-webkit-appearance:none;
+
+-moz-appearance:none;
+
+cursor:pointer;
+
+}
+
+#subKategori{
+
+margin-top:14px;
+
+}
