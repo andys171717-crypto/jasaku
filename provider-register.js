@@ -4,7 +4,7 @@ from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import {
 getFirestore,
 doc,
-updateDoc
+setDoc
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
@@ -149,7 +149,7 @@ return;
 
 try{
 
-await updateDoc(
+await setDoc(
 doc(
 db,
 "users",
@@ -165,12 +165,15 @@ district,
 address,
 description,
 
-providerProfileComplete:
-true,
+providerProfileComplete:true,
 
-providerStatus:
-"approved"
+providerStatus:"approved",
 
+role:"provider"
+
+},
+{
+merge:true
 }
 );
 
