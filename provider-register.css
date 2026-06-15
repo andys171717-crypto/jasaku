@@ -9,10 +9,16 @@ padding:30px 20px;
 }
 
 .provider-card{
+
 background:white;
-border-radius:20px;
-padding:20px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+border-radius:24px;
+
+padding:30px 25px;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.08);
+
 }
 
 .provider-title{
@@ -46,21 +52,38 @@ font-size:15px;
 }
 
 .provider-btn{
-width:100%;
-padding:15px;
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+min-width:220px;
+
+padding:16px 30px;
+
 border:none;
-border-radius:14px;
-background:#2563eb;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#4f46e5
+);
+
 color:white;
+
 font-size:16px;
+
 font-weight:700;
+
 cursor:pointer;
 
-display:block;
+margin-top:25px;
 
-width:100%;
-
-margin-top:20px;
 }
 
 .back-link{
@@ -79,8 +102,8 @@ text-align:center;
 
 .provider-avatar{
 
-width:100px;
-height:100px;
+width:120px;
+height:120px;
 
 margin:auto;
 
@@ -97,7 +120,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 
-font-size:40px;
+font-size:52px;
 
 color:white;
 
@@ -109,9 +132,11 @@ margin-bottom:15px;
 
 .provider-profile h2{
 
-margin:0;
+margin-top:10px;
 
-font-size:24px;
+font-size:32px;
+
+line-height:1.2;
 
 font-weight:800;
 
@@ -149,9 +174,11 @@ text-align:left;
 
 .provider-info p{
 
-margin:10px 0;
+margin:12px 0;
 
-font-size:15px;
+font-size:17px;
+
+font-weight:500;
 
 color:#334155;
 
@@ -261,5 +288,12 @@ border:1px solid #e2e8f0;
 font-size:13px;
 
 font-weight:600;
+
+}
+
+.provider-profile .provider-btn{
+
+margin-left:auto;
+margin-right:auto;
 
 }
