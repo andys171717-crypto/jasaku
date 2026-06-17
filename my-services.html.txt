@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jasa Saya</title>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="provider.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+</head>
+
+<body>
+
+<div class="provider-header">
+
+<h1>Jasa Saya</h1>
+
+<p>
+Kelola layanan yang Anda tawarkan
+</p>
+
+</div>
+
+<div class="provider-action">
+  
+<a
+href="tambah-jasa.html"
+class="btn-provider">
+
++ Tambah Jasa
+
+</a>
+
+</div>
+
+<div id="providerStats"></div>
+
+<div id="servicesList"></div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+query,
+where,
+getDocs,
+deleteDoc,
+doc
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain:"jasaku-92b55.firebaseapp.com",
+projectId:"jasaku-92b55",
+storageBucket:"jasaku-92b55.firebasestorage.app",
+messagingSenderId:"217601622524",
+appId:"1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+async function loadServices(uid){
+
+const container =
+document.getElementById(
+"servicesList"
+);
+
+container.innerHTML = "";
+
+const q =
+query(
+collection(db,"services"),
+where(
+"userId",
+"==",
+uid
+)
+);
+
+const snapshot =
+await getDocs(q);
+  
+const stats =
+document.getElementById(
+"providerStats"
+);
+
+stats.innerHTML = `
+
+<div class="stats-card">
+
+<h2>
+${snapshot.size}
+</h2>
+
+<p>
+Jasa Aktif
+</p>
+
+</div>
+
+`;
+
+if(snapshot.empty){
+
+container.innerHTML = `
+<div class="empty">
+
+Belum ada jasa yang dibuat
+
+</div>
+`;
+
+return;
+
+}
+
+snapshot.forEach(service=>{
+
+const data =
+service.data();
+
+container.innerHTML += `
+
+<div class="provider-card">
+  
+<h3>
+${data.namaJasa}
+</h3>
+
+<p>
+Kategori:
+${data.kategori}
+</p>
+
+<p>
+Harga:
+Rp ${data.harga}
+</p>
+
+<p>
+Alamat:
+${data.alamatOperasional || "-"}
+</p>
+
+<div class="provider-buttons">
+  
+<button
+class="btn-delete"
+data-id="${service.id}">
+Hapus
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+if(!user){
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+loadServices(
+user.uid
+);
+
+}
+);
+
+document.addEventListener(
+"click",
+async(e)=>{
+
+if(
+e.target.classList.contains(
+"btn-delete"
+)
+){
+
+if(
+!confirm(
+"Yakin hapus jasa ini?"
+)
+){
+return;
+}
+
+await deleteDoc(
+doc(
+db,
+"services",
+e.target.dataset.id
+)
+);
+
+location.reload();
+
+}
+
+}
+);
+
+</script>
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+
+<i class="fas fa-house"></i>
+
+<small>Beranda</small>
+
+</a>
+
+<a href="index.html" class="nav-item">
+
+<i class="fas fa-magnifying-glass"></i>
+
+<small>Cari</small>
+
+</a>
+
+<a href="pesanan.html" class="nav-item">
+
+<i class="fas fa-clipboard-list"></i>
+
+<small>Pesanan</small>
+
+</a>
+
+<a href="akun.html" class="nav-item active">
+
+<i class="fas fa-user"></i>
+
+<small>Akun</small>
+
+</a>
+
+</nav>
+
+</body>
+</html>

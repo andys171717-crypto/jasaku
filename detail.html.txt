@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Teknisi - JasaKu</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+.detail-header{
+background:#1e3a8a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.profile-card{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.profile-image{
+width:120px;
+height:120px;
+border-radius:50%;
+background:#e2e8f0;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px;
+}
+
+.profile-card h2{
+margin-top:15px;
+color:#0f172a;
+}
+
+.rating{
+color:#f59e0b;
+margin-top:10px;
+font-weight:bold;
+}
+
+.info-box{
+background:white;
+margin:15px 20px;
+padding:20px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.info-box h3{
+margin-bottom:10px;
+color:#0f172a;
+}
+
+.action-buttons{
+display:flex;
+gap:10px;
+padding:20px;
+}
+
+.chat-btn,
+.order-btn{
+flex:1;
+padding:14px;
+border:none;
+border-radius:14px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.chat-btn{
+background:#e2e8f0;
+}
+
+.order-btn{
+background:#2563eb;
+color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="detail-header">
+<h1>Detail Teknisi</h1>
+</div>
+
+<div class="profile-card">
+
+<div class="profile-image">
+🔧
+</div>
+
+<h2 id="namaJasa">Loading...</h2>
+
+<div class="rating">
+⭐ 4.9 (120 Review)
+</div>
+
+<p style="margin-top:10px;">
+250+ pekerjaan selesai
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h3>Area Layanan</h3>
+
+<p id="areaLayanan">
+Loading...
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h3>Harga Mulai</h3>
+
+<p id="harga">
+Loading...
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h3>Tentang Teknisi</h3>
+
+<p id="deskripsi">
+Loading...
+</p>
+
+</div>
+
+<div class="action-buttons">
+
+<button
+class="chat-btn"
+disabled>
+💬 Chat
+</button>
+
+<button
+id="btnPesan"
+class="order-btn">
+Pesan Sekarang
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
+authDomain: "jasaku-92b55.firebaseapp.com",
+projectId: "jasaku-92b55",
+storageBucket: "jasaku-92b55.firebasestorage.app",
+messagingSenderId: "217601622524",
+appId: "1:217601622524:web:e3bc48dbdc50d7cb10b279"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const serviceId =
+params.get("id");
+  
+let serviceOwnerId = null;
+
+async function loadDetail(){
+
+if(!serviceId){
+  
+document.getElementById(
+"btnPesan"
+).disabled = true;
+
+document.getElementById(
+"namaJasa"
+).innerText =
+"Jasa Tidak Ditemukan";
+
+document.getElementById(
+"harga"
+).innerText =
+"-";
+
+document.getElementById(
+"deskripsi"
+).innerText =
+"Data jasa tidak tersedia";
+  
+return;
+
+}
+
+const serviceRef =
+doc(
+db,
+"services",
+serviceId
+);
+
+const serviceSnap =
+await getDoc(serviceRef);
+
+if(serviceSnap.exists()){
+
+const data =
+serviceSnap.data();
+  
+serviceOwnerId =
+data.userId; 
+  
+document.getElementById(
+"areaLayanan"
+).innerText =
+data.kota || "-"; 
+
+document.getElementById(
+"namaJasa"
+).innerText =
+data.namaJasa;
+
+document.getElementById(
+"harga"
+).innerText =
+"Rp " + data.harga;
+
+document.getElementById(
+"deskripsi"
+).innerText =
+data.deskripsi;
+
+}else{
+  
+document.getElementById(
+"btnPesan"
+).disabled = true;
+
+document.getElementById(
+"namaJasa"
+).innerText =
+"Jasa Tidak Ditemukan";
+
+document.getElementById(
+"harga"
+).innerText =
+"-";
+
+document.getElementById(
+"deskripsi"
+).innerText =
+"Data jasa tidak tersedia";
+
+}
+
+}
+
+loadDetail();
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const auth = getAuth(app);
+
+let isLoggedIn = false;
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+isLoggedIn = !!user;
+
+}
+);
+
+document
+.getElementById("btnPesan")
+.addEventListener("click",()=>{
+
+const user =
+auth.currentUser;
+
+if(!user){
+
+alert(
+"Silakan login terlebih dahulu"
+);
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+if(
+user.uid ===
+serviceOwnerId
+){
+
+alert(
+"Anda tidak dapat memesan jasa milik sendiri"
+);
+
+return;
+
+}
+
+window.location.href =
+"booking.html?id=" +
+serviceId;
+
+});
+
+</script>
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+🏠
+<small>Beranda</small>
+</a>
+
+<a href="#" class="nav-item">
+🔍
+<small>Cari</small>
+</a>
+
+<a href="pesanan.html" class="nav-item">
+📋
+<small>Pesanan</small>
+</a>
+
+<a href="akun.html" class="nav-item">
+👤
+<small>Akun</small>
+</a>
+
+</nav>
+
+
+</body>
+</html>
