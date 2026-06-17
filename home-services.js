@@ -1,3 +1,37 @@
+const badgeStyle = document.createElement("style");
+
+badgeStyle.innerHTML = `
+
+.service-badge{
+display:inline-block;
+padding:4px 10px;
+border-radius:999px;
+font-size:11px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.service-badge.express{
+background:#fef3c7;
+color:#92400e;
+}
+
+.service-badge.scheduled{
+background:#dbeafe;
+color:#1e40af;
+}
+
+.service-badge.both{
+background:#dcfce7;
+color:#166534;
+}
+
+`;
+
+document.head.appendChild(
+badgeStyle
+);
+
 window.HomeServices = {
 
 renderServices(
@@ -41,6 +75,28 @@ container.innerHTML += `
 <div class="provider-card">
 
 <div class="provider-info">
+
+${
+data.serviceType === "express"
+? `
+<div class="service-badge express">
+⚡ EKSPRES
+</div>
+`
+: data.serviceType === "scheduled"
+? `
+<div class="service-badge scheduled">
+📅 TERJADWAL
+</div>
+`
+: data.serviceType === "both"
+? `
+<div class="service-badge both">
+⚡📅 EKSPRES & TERJADWAL
+</div>
+`
+: ""
+}
 
 <h3>
 ${data.namaJasa || "-"}
