@@ -61,7 +61,7 @@ ${data.namaJasa || "-"}
 </div>
 
 <a
-href="detail-jasa.html?id=${data.id}"
+href="detail.html?id=${data.id}"
 class="btn-pesan">
 
 Lihat Detail
