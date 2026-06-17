@@ -709,11 +709,32 @@ await getDocs(
 collection(db,"services")
 );
 
+const userSnapshot =
+await getDocs(
+collection(db,"users")
+);
+
+const usersMap = {};
+
+userSnapshot.forEach(userDoc=>{
+
+const userData =
+userDoc.data();
+
+usersMap[userDoc.id] =
+userData;
+
+});
+
 allServices = [];
 
 serviceSnapshot.forEach(doc=>{
 
-const data = doc.data();
+const data =
+doc.data();
+
+const provider =
+usersMap[data.userId] || {};
 
 allServices.push({
 
@@ -729,10 +750,15 @@ harga:
 Number(data.harga || 0),
 
 alamat:
-data.alamatOperasional || "-",
+data.alamatOperasional ||
+provider.address ||
+provider.city ||
+"-",
 
 businessName:
-data.businessName || "Penyedia Jasa",
+provider.businessName ||
+provider.name ||
+"Penyedia Jasa",
 
 deskripsi:
 data.deskripsi || ""
@@ -762,6 +788,8 @@ ${error.message}
 }
 
 }
+
+loadServices();
 
 import {
 getAuth,
