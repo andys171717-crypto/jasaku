@@ -1,4 +1,4 @@
-console.log("JasaKu Ready");
+console.log("JasaKita Ready");
 
 const slides =
 document.querySelectorAll(".slide");
