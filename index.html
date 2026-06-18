@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JasaKu</title>
+  <title>JasaKita</title>
 
   <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -14,8 +14,26 @@
 
   <header>
 
-  <div class="location">
+  <div class="header-top">
+
+<div class="location">
 📍 Medan
+</div>
+
+<div class="header-actions">
+
+<i
+class="fa-regular fa-bell"
+id="btnNotif">
+</i>
+
+<i
+class="fa-solid fa-headset"
+id="btnCS">
+</i>
+
+</div>
+
 </div>
 
 <div class="header-user">
@@ -205,7 +223,7 @@ Mulai Sekarang 🚀
 
 <p>
 Masuk atau daftar untuk
-menikmati semua fitur JasaKu
+menikmati semua fitur JasaKita
 </p>
   
 <div
@@ -442,7 +460,7 @@ document.getElementById(
 ← Kembali
 </button>
 
-<h3>Daftar Akun JasaKu</h3>
+<h3>Daftar Akun JasaKita</h3>
 
 <input
 type="text"
@@ -1276,6 +1294,33 @@ heroText.innerText =
 }
 
 });
+
+document
+.getElementById("btnNotif")
+?.addEventListener(
+"click",
+()=>{
+
+showToast(
+"Belum ada notifikasi"
+);
+
+}
+);
+
+document
+.getElementById("btnCS")
+?.addEventListener(
+"click",
+()=>{
+
+window.open(
+"https://wa.me/6281234567890",
+"_blank"
+);
+
+}
+);
 
 loadServices();
 
