@@ -81,6 +81,7 @@ margin-top:15px;
 }
 
 .btn-accept,
+.btn-finish,
 .btn-reject{
 flex:1;
 border:none;
@@ -97,6 +98,11 @@ color:white;
 
 .btn-reject{
 background:#dc2626;
+color:white;
+}
+
+.btn-finish{
+background:#2563eb;
 color:white;
 }
 
@@ -292,6 +298,12 @@ Terima
 </button>
 
 <button
+class="btn-finish"
+data-id="${order.id}">
+Selesai
+</button>
+
+<button
 class="btn-reject"
 data-id="${order.id}">
 Tolak
@@ -336,6 +348,27 @@ e.target.classList.contains(
 "btn-accept"
 )
 ){
+
+if(
+e.target.classList.contains(
+"btn-finish"
+)
+){
+
+await updateDoc(
+doc(
+db,
+"orders",
+e.target.dataset.id
+),
+{
+status:"Selesai"
+}
+);
+
+location.reload();
+
+}    
 
 await updateDoc(
 doc(
