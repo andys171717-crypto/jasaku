@@ -374,6 +374,8 @@ color:#ffffff;
 
 text-shadow:
 0 2px 4px rgba(0,0,0,.20);
+
+transition:opacity .2s ease;
 }
 
 .header-user{
@@ -1399,4 +1401,31 @@ cursor:pointer;
 
 margin-top:14px;
 
+}
+
+.header-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:8px;
+}
+
+.header-actions{
+display:flex;
+gap:14px;
+}
+
+.header-actions i{
+color:white;
+font-size:20px;
+cursor:pointer;
+transition:.2s;
+}
+
+.header-actions i:hover{
+transform:scale(1.1);
+}
+
+.header-actions i:active{
+transform:scale(.95);
 }
