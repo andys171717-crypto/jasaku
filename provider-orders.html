@@ -349,6 +349,23 @@ e.target.classList.contains(
 )
 ){
 
+await updateDoc(
+doc(
+db,
+"orders",
+e.target.dataset.id
+),
+{
+status:"Diterima"
+}
+);
+
+location.reload();
+
+return;
+
+}
+
 if(
 e.target.classList.contains(
 "btn-finish"
@@ -368,20 +385,7 @@ status:"Selesai"
 
 location.reload();
 
-}    
-
-await updateDoc(
-doc(
-db,
-"orders",
-e.target.dataset.id
-),
-{
-status:"Diterima"
-}
-);
-
-location.reload();
+return;
 
 }
 
@@ -403,6 +407,8 @@ status:"Ditolak"
 );
 
 location.reload();
+
+return;
 
 }
 
