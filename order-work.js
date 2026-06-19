@@ -220,6 +220,11 @@ document.getElementById(
 "progressTimeline"
 );
 
+console.log(
+"Timeline:",
+timeline
+);
+
 timeline.innerHTML = `
 
 <button
