@@ -225,6 +225,10 @@ console.log(
 timeline
 );
 
+alert(
+timeline
+);
+
 timeline.innerHTML = `
 
 <button
