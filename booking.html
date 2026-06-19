@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Booking Jasa - JasaKu</title>
+<title>Ajukan Permintaan - JasKit</title>
 
 <link
 rel="stylesheet"
@@ -110,10 +110,10 @@ class="back-btn">
 
 <div>
 
-<h1>Pesan Jasa</h1>
+<h1>Ajukan Permintaan</h1>
 
 <p>
-Lengkapi data pemesanan
+Jelaskan kebutuhan Anda kepada penyedia jasa
 </p>
 
 </div>
@@ -155,7 +155,7 @@ Lengkapi data pemesanan
 <button
 class="booking-btn"
 id="btnPesan">
-Konfirmasi Pesanan
+Kirim Permintaan
 </button>
 
 </div>
@@ -283,7 +283,7 @@ return;
 try{
 
 await addDoc(
-collection(db,"orders"),
+collection(db,"requests"),
 {
 
 userId:
@@ -308,7 +308,7 @@ alamat,
 keluhan,
 
 status:
-"Menunggu",
+"Menunggu Penawaran",
 
 createdAt:
 Date.now()
@@ -317,11 +317,11 @@ Date.now()
 );
 
 alert(
-"Pesanan berhasil dibuat"
+"Permintaan berhasil dikirim"
 );
 
 window.location.href =
-"pesanan.html";
+"requests.html";
 
 }catch(error){
 
