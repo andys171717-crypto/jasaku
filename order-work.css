@@ -411,3 +411,32 @@ color:#64748b;
 line-height:1.5;
 
 }
+
+.step.done{
+
+background:#dcfce7;
+
+border:2px solid #22c55e;
+
+color:#166534;
+}
+
+.step.next{
+
+background:#dbeafe;
+
+border:2px solid #2563eb;
+
+color:#1d4ed8;
+}
+
+.step.locked{
+
+background:#f1f5f9;
+
+border:1px solid #e2e8f0;
+
+color:#94a3b8;
+
+opacity:.6;
+}
