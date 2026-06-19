@@ -84,6 +84,19 @@ return;
 const data =
 orderSnap.data();
 
+const steps = [
+"Berangkat",
+"Tiba Lokasi",
+"Sedang Dikerjakan",
+"Selesai"
+];
+
+const currentProgress =
+data.progress || "";
+
+const currentIndex =
+steps.indexOf(currentProgress);
+
 document.addEventListener(
 "click",
 async(e)=>{
@@ -98,13 +111,6 @@ return;
 
 const progress =
 e.target.dataset.progress;
-
-const steps = [
-"Berangkat",
-"Tiba Lokasi",
-"Sedang Dikerjakan",
-"Selesai"
-];
 
 const currentProgress =
 data.progress || "";
@@ -208,6 +214,86 @@ container.innerHTML = `
 </div>
 
 `;
+
+const timeline =
+document.getElementById(
+"progressTimeline"
+);
+
+timeline.innerHTML = `
+
+<button
+class="step progress-btn"
+data-progress="Berangkat">
+🚗 Saya Berangkat
+</button>
+
+<button
+class="step progress-btn"
+data-progress="Tiba Lokasi">
+📍 Saya Sudah Tiba
+</button>
+
+<button
+class="step progress-btn"
+data-progress="Sedang Dikerjakan">
+🔧 Sedang Mengerjakan
+</button>
+
+<button
+class="step progress-btn"
+data-progress="Selesai">
+🏁 Pekerjaan Selesai
+</button>
+
+`;
+
+const buttons =
+document.querySelectorAll(
+".progress-btn"
+);
+
+buttons.forEach(btn=>{
+
+const btnIndex =
+steps.indexOf(
+btn.dataset.progress
+);
+
+if(btnIndex < currentIndex){
+
+btn.classList.add(
+"done"
+);
+
+}
+else if(
+btnIndex === currentIndex
+){
+
+btn.classList.add(
+"active"
+);
+
+}
+else if(
+btnIndex === currentIndex + 1
+){
+
+btn.classList.add(
+"next"
+);
+
+}
+else{
+
+btn.classList.add(
+"locked"
+);
+
+}
+
+});
 
 }catch(error){
 
