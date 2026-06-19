@@ -121,6 +121,30 @@ steps.indexOf(currentProgress);
 const nextIndex =
 steps.indexOf(progress);
 
+if(nextIndex === currentIndex){
+
+alert(
+"Progress ini sudah aktif"
+);
+
+return;
+
+}
+
+// tidak boleh mundur
+
+if(nextIndex < currentIndex){
+
+alert(
+"Tahap yang sudah selesai tidak bisa diulang"
+);
+
+return;
+
+}
+
+// tidak boleh loncat
+
 if(nextIndex > currentIndex + 1){
 
 alert(
@@ -128,6 +152,7 @@ alert(
 );
 
 return;
+
 }
 
 try{
@@ -218,15 +243,6 @@ container.innerHTML = `
 const timeline =
 document.getElementById(
 "progressTimeline"
-);
-
-console.log(
-"Timeline:",
-timeline
-);
-
-alert(
-timeline
 );
 
 timeline.innerHTML = `
