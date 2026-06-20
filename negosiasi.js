@@ -4,7 +4,13 @@ from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import {
 getFirestore,
 doc,
-getDoc
+getDoc,
+collection,
+addDoc,
+query,
+orderBy,
+onSnapshot,
+serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
@@ -38,6 +44,8 @@ window.location.search
 
 const requestId =
 params.get("id");
+
+let currentUser = null;
 
 async function loadRequest(){
 
@@ -134,6 +142,95 @@ ${data.status || "-"}
 
 }
 
+function initRealtimeChat(){
+
+const messagesRef =
+collection(
+db,
+"requests",
+requestId,
+"messages"
+);
+
+const q =
+query(
+messagesRef,
+orderBy(
+"createdAt",
+"asc"
+)
+);
+
+onSnapshot(
+q,
+(snapshot)=>{
+
+const chat =
+document.getElementById(
+"chatMessages"
+);
+
+chat.innerHTML = "";
+
+snapshot.forEach(
+(docItem)=>{
+
+const msg =
+docItem.data();
+
+chat.innerHTML += `
+<div class="message ${
+msg.senderId === currentUser.uid
+? "provider"
+: "customer"
+}">
+${msg.text}
+</div>
+`;
+
+}
+);
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+);
+
+}
+
+async function sendMessage(){
+
+const input =
+document.getElementById(
+"messageInput"
+);
+
+const text =
+input.value.trim();
+
+if(!text) return;
+
+await addDoc(
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+{
+text:text,
+senderId:
+currentUser.uid,
+createdAt:
+serverTimestamp()
+}
+);
+
+input.value = "";
+
+}
+
 onAuthStateChanged(
 auth,
 (user)=>{
@@ -147,15 +244,20 @@ return;
 
 }
 
+currentUser = user;
+
 loadRequest();
 
-document.getElementById(
-"chatMessages"
-).innerHTML = `
-<div class="message customer">
-Ruang negosiasi sedang disiapkan...
-</div>
-`;
+initRealtimeChat();
+
+document
+.getElementById(
+"sendBtn"
+)
+.addEventListener(
+"click",
+sendMessage
+);
 
 }
 );
