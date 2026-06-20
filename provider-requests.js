@@ -47,7 +47,15 @@ where("providerId","==",uid)
 const snapshot =
 await getDocs(q);
 
-if(snapshot.empty){
+const requests =
+snapshot.docs
+.sort(
+(a,b)=>
+(b.data().createdAt || 0) -
+(a.data().createdAt || 0)
+);
+
+if(requests.length === 0){
 
 container.innerHTML = `
 <div class="request-card">
@@ -58,7 +66,7 @@ container.innerHTML = `
 return;
 }
 
-snapshot.forEach(req=>{
+requests.forEach(req=>{
 
 const data = req.data();
 
