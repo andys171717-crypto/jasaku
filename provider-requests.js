@@ -66,6 +66,10 @@ container.innerHTML += `
 
 <div class="request-card">
 
+<div class="request-code">
+${data.requestCode || "-"}
+</div>
+
 <h3>${data.namaJasa}</h3>
 
 <div class="status">
