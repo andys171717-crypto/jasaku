@@ -79,8 +79,6 @@ document
 .addEventListener(
 "click",
 async ()=>{
- 
-alert("EVENT CLICK JALAN"); 
 
 console.log(currentUser);  
     
@@ -131,18 +129,8 @@ return;
 }
 
 try{
-    
-const providerCode =
-"JKMTEST";  
-    
-alert(
-providerCode
-);   
-    
- console.log(
-"Provider Code:",
-providerCode
-);  
+
+const providerCode = "JKMTEST";
 
 await setDoc(
 doc(
