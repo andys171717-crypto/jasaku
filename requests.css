@@ -74,3 +74,15 @@ text-align:center;
 box-shadow:
 0 10px 30px rgba(0,0,0,.08);
 }
+
+.request-code{
+display:inline-block;
+margin-bottom:10px;
+padding:6px 12px;
+border-radius:999px;
+background:#eef2ff;
+color:#4338ca;
+font-size:12px;
+font-weight:700;
+letter-spacing:.5px;
+}
