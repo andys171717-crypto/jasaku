@@ -131,7 +131,7 @@ return;
 try{
 
 const providerCode =
-await generateProviderCode();
+await generateProviderCode(db);
 
 await setDoc(
 doc(
