@@ -160,6 +160,22 @@ status:"Sedang Ditinjau"
 }
 );
 
+window.location.href =
+`negosiasi.html?id=${e.target.dataset.id}`;
+
+}
+
+await updateDoc(
+doc(
+db,
+"requests",
+e.target.dataset.id
+),
+{
+status:"Sedang Ditinjau"
+}
+);
+
 location.reload();
 
 }
