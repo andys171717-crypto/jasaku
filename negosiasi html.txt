@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Negosiasi Permintaan</title>
+
+<link rel="stylesheet" href="negosiasi.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<a href="provider-requests.html">
+←
+</a>
+
+<div>
+
+<h1>Negosiasi</h1>
+
+<p>
+Diskusi pekerjaan & harga
+</p>
+
+</div>
+
+</div>
+
+<div id="requestInfo">
+
+Loading...
+
+</div>
+
+<div id="chatMessages"
+class="chat-container">
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="text"
+id="messageInput"
+placeholder="Tulis pesan...">
+
+<button id="sendBtn">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
+
+</div>
+
+<div class="provider-actions">
+
+<button id="acceptBtn">
+
+Terima Permintaan
+
+</button>
+
+</div>
+
+<nav class="bottom-nav">
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+<span>Beranda</span>
+</a>
+
+<a href="index.html#search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span>Cari</span>
+</a>
+
+<a href="pesanan.html" class="active">
+<i class="fa-solid fa-clipboard-list"></i>
+<span>Pesanan</span>
+</a>
+
+<a href="akun.html">
+<i class="fa-solid fa-user"></i>
+<span>Akun</span>
+</a>
+
+</nav>
+
+<script
+type="module"
+src="negosiasi.js">
+</script>
+
+</body>
+</html>
