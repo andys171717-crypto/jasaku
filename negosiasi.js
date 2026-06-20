@@ -45,11 +45,29 @@ const requestSnap =
 await getDoc(requestRef);
 
 if(!requestSnap.exists()){
+
+document.getElementById(
+"requestInfo"
+).innerHTML = `
+<h3>Data Request Tidak Ditemukan</h3>
+<p>ID: ${requestId}</p>
+`;
+
 return;
 }
 
 const data =
 requestSnap.data();
+
+document.getElementById(
+"requestInfo"
+).innerHTML = `
+<pre>
+${JSON.stringify(data,null,2)}
+</pre>
+`;
+
+return;
 
 document.getElementById(
 "requestInfo"
