@@ -88,7 +88,15 @@ container.innerHTML += `
 <div class="request-card">
 
 <div class="request-code">
+
+<div class="code-label">
+Kode Permintaan
+</div>
+
+<div class="code-value">
 ${data.requestCode || "-"}
+</div>
+
 </div>
 
 <h2>
