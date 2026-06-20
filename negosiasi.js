@@ -41,13 +41,6 @@ db,
 requestId
 );
 
-document.getElementById(
-"requestInfo"
-).innerHTML = `
-<h3>Request ID</h3>
-<p>${requestId}</p>
-`;
-
 const requestSnap =
 await getDoc(requestRef);
 
@@ -65,16 +58,6 @@ return;
 
 const data =
 requestSnap.data();
-
-document.getElementById(
-"requestInfo"
-).innerHTML = `
-<pre>
-${JSON.stringify(data,null,2)}
-</pre>
-`;
-
-return;
 
 document.getElementById(
 "requestInfo"
