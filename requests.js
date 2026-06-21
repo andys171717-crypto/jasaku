@@ -139,6 +139,12 @@ ${data.keluhan}
 
 </div>
 
+<button
+class="btn-chat"
+onclick="window.location.href='negosiasi.html?id=${doc.id}'">
+Buka Negosiasi
+</button>
+
 </div>
 
 `;
