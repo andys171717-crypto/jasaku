@@ -123,7 +123,9 @@ gap:8px;
 
 padding:12px 15px;
 
-padding-bottom:20px;
+padding-bottom:260px;
+
+height:calc(100vh - 120px);
 
 overflow-y:auto;
 
