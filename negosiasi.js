@@ -246,15 +246,14 @@ ${formatTime(msg.createdAt)}
 }
 );
 
-setTimeout(
-()=>{
+requestAnimationFrame(()=>{
 
-chat.scrollTop =
-chat.scrollHeight;
+chat.lastElementChild?.scrollIntoView({
+behavior:"smooth",
+block:"end"
+});
 
-},
-100
-);
+});
 
 }
 );
@@ -311,6 +310,18 @@ currentUser = user;
 await loadRequest();
 
 initRealtimeChat();
+
+const acceptBtn =
+document.getElementById(
+"acceptBtn"
+);
+
+if(!isProvider){
+
+acceptBtn.style.display =
+"none";
+
+}
 
 document
 .getElementById(
