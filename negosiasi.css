@@ -45,6 +45,10 @@ padding:18px;
 border-radius:20px;
 box-shadow:
 0 10px 25px rgba(0,0,0,.08);
+
+position:sticky;
+top:70px;
+z-index:90;
 }
 
 .request-code{
@@ -60,6 +64,13 @@ margin-bottom:10px;
 
 .negotiation-status{
 margin:0 15px 15px;
+
+position:sticky;
+top:250px;
+z-index:89;
+
+background:#f5f7fb;
+padding-bottom:10px;
 }
 
 #statusBadge{
