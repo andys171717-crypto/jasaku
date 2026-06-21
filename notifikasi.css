@@ -2,7 +2,8 @@ body{
 margin:0;
 background:#f5f7fb;
 font-family:Arial,sans-serif;
-padding-bottom:150px;
+
+padding-bottom:260px;
 }
 
 .sticky-area{
@@ -60,6 +61,31 @@ margin:8px 0 10px;
 font-size:18px;
 }
 
+.mini-info{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.mini-info span:first-child{
+font-weight:700;
+font-size:14px;
+color:#0f172a;
+}
+
+.mini-info span:last-child{
+font-size:12px;
+font-weight:700;
+
+padding:6px 10px;
+
+border-radius:999px;
+
+background:#fef3c7;
+color:#92400e;
+}
+
 .request-code{
 display:inline-block;
 padding:6px 12px;
@@ -89,15 +115,15 @@ font-weight:700;
 }
 
 .chat-container{
+
 display:flex;
 flex-direction:column;
+
 gap:8px;
 
 padding:12px 15px;
 
-padding-bottom:250px;
-
-height:auto;
+padding-bottom:20px;
 
 overflow-y:auto;
 
@@ -157,7 +183,7 @@ position:fixed;
 left:15px;
 right:15px;
 
-bottom:175px;
+bottom:160px;
 
 background:#fff;
 
@@ -200,7 +226,7 @@ position:fixed;
 left:15px;
 right:15px;
 
-bottom:90px;
+bottom:92px;
 
 padding:0;
 
