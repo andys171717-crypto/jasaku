@@ -201,7 +201,7 @@ chat.scrollHeight;
 
 async function sendMessage(){
 
-alert("TOMBOL KIRIM DIKLIK");
+try{
 
 const input =
 document.getElementById(
@@ -211,7 +211,13 @@ document.getElementById(
 const text =
 input.value.trim();
 
-if(!text) return;
+if(!text){
+
+alert("Pesan kosong");
+
+return;
+
+}
 
 await addDoc(
 collection(
@@ -229,7 +235,22 @@ serverTimestamp()
 }
 );
 
+alert(
+"PESAN BERHASIL DISIMPAN"
+);
+
 input.value = "";
+
+}catch(error){
+
+alert(
+"ERROR:\n\n" +
+error.message
+);
+
+console.error(error);
+
+}
 
 }
 
