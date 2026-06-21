@@ -173,11 +173,6 @@ ${requestData.requestCode || "-"}
 
 }
 
-document.getElementById(
-"statusBadge"
-).innerHTML =
-`🟡 ${requestData.status || "Negosiasi"}`;
-
 }
 
 function initRealtimeChat(){
