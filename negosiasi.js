@@ -118,29 +118,17 @@ if(isProvider){
 
 card.innerHTML = `
 
-<div class="request-code">
-${requestData.requestCode || "-"}
-</div>
+<div class="mini-info">
 
-<h2>
+<span>
 👤 ${requestData.nama || "-"}
-</h2>
+</span>
 
-<p>
-📞 ${requestData.hp || "-"}
-</p>
-
-<p>
-📍 ${requestData.alamat || "-"}
-</p>
-
-<p>
-📝 ${requestData.keluhan || "-"}
-</p>
-
-<p>
+<span>
 🟡 ${requestData.status || "-"}
-</p>
+</span>
+
+</div>
 
 `;
 
@@ -148,21 +136,17 @@ ${requestData.requestCode || "-"}
 
 card.innerHTML = `
 
-<div class="request-code">
-${requestData.requestCode || "-"}
-</div>
+<div class="mini-info">
 
-<h2>
+<span>
 🏢 ${requestData.namaJasa || "-"}
-</h2>
+</span>
 
-<p>
-📍 ${requestData.alamat || "-"}
-</p>
-
-<p>
+<span>
 🟡 ${requestData.status || "-"}
-</p>
+</span>
+
+</div>
 
 `;
 
