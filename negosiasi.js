@@ -123,13 +123,8 @@ ${requestData.requestCode || "-"}
 </div>
 
 <h2>
-👤 Customer
+👤 ${requestData.nama || "-"}
 </h2>
-
-<p>
-<b>${requestData.nama || "-"}
-</b>
-</p>
 
 <p>
 📞 ${requestData.hp || "-"}
