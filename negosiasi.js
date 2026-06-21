@@ -213,8 +213,6 @@ input.value.trim();
 
 if(!text){
 
-alert("Pesan kosong");
-
 return;
 
 }
@@ -235,18 +233,9 @@ serverTimestamp()
 }
 );
 
-alert(
-"PESAN BERHASIL DISIMPAN"
-);
-
 input.value = "";
 
 }catch(error){
-
-alert(
-"ERROR:\n\n" +
-error.message
-);
 
 console.error(error);
 
@@ -280,6 +269,27 @@ document
 .addEventListener(
 "click",
 sendMessage
+);
+
+document
+.getElementById(
+"messageInput"
+)
+.addEventListener(
+"keydown",
+(e)=>{
+
+if(
+e.key === "Enter"
+){
+
+e.preventDefault();
+
+sendMessage();
+
+}
+
+}
 );
 
 }
