@@ -48,11 +48,28 @@ class="chat-container">
 <div class="chat-input">
 
 <input
+type="file"
+id="imageInput"
+accept="image/*"
+capture="environment"
+style="display:none;">
+
+<button
+id="photoBtn"
+type="button">
+
+<i class="fa-solid fa-camera"></i>
+
+</button>
+
+<input
 type="text"
 id="messageInput"
 placeholder="Tulis pesan...">
 
-<button id="sendBtn">
+<button
+id="sendBtn"
+type="button">
 
 <i class="fa-solid fa-paper-plane"></i>
 
