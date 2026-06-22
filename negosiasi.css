@@ -214,14 +214,27 @@ font-size:14px;
 }
 
 .chat-input button{
+
 width:52px;
 height:48px;
+
 border:none;
+
 border-radius:14px;
+
 background:#4f46e5;
+
 color:#fff;
+
 font-size:18px;
+
 cursor:pointer;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+flex-shrink:0;
 }
 
 .provider-actions{
