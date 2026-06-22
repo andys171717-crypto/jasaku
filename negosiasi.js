@@ -41,6 +41,7 @@ let requestData = null;
 let isProvider = false;
 let firstLoad = true;
 let lastMessageCount = 0;
+let selectedImage = null;
 
 const IMGBB_API_KEY =
 "c2e3fcd3251f6d46da391b73e5113cda";
@@ -265,6 +266,23 @@ behavior: "smooth"
 
 async function sendMessage(){
 
+if(selectedImage){
+
+await sendImage(
+selectedImage
+);
+
+selectedImage = null;
+
+document.getElementById(
+"imagePreview"
+).style.display =
+"none";
+
+return;
+
+}  
+
 const input =
 document.getElementById(
 "messageInput"
@@ -478,11 +496,23 @@ e.target.files[0];
 
 if(!file) return;
 
-try{
+selectedImage = file;
 
-await sendImage(file);
+const preview =
+document.getElementById(
+"imagePreview"
+);
 
-}catch(err){
+const previewImg =
+document.getElementById(
+"previewImg"
+);
+
+previewImg.src =
+URL.createObjectURL(file);
+
+preview.style.display =
+"flex";
 
 console.error(err);
 
@@ -493,6 +523,32 @@ alert(
 }
 
 e.target.value = "";
+
+}
+);
+
+document
+.getElementById(
+"removePreview"
+)
+.addEventListener(
+"click",
+()=>{
+
+selectedImage = null;
+
+document
+.getElementById(
+"imagePreview"
+)
+.style.display =
+"none";
+
+document
+.getElementById(
+"imageInput"
+)
+.value = "";
 
 }
 );
