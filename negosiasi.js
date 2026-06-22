@@ -234,6 +234,9 @@ ${formatTime(msg.createdAt)}
 
 setTimeout(()=>{
 
+chat.scrollTop =
+chat.scrollHeight;
+
 window.scrollTo({
 top: document.body.scrollHeight,
 behavior: "smooth"
