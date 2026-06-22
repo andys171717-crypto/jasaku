@@ -3,7 +3,7 @@ margin:0;
 background:#f5f7fb;
 font-family:Arial,sans-serif;
 
-padding-bottom:260px;
+padding-bottom:180px;
 }
 
 .sticky-area{
@@ -123,7 +123,9 @@ gap:8px;
 
 padding:12px 15px;
 
-padding-bottom:20px;
+padding-bottom:220px;
+
+background:#f5f7fb;
 }
 
 .message{
@@ -179,7 +181,7 @@ position:fixed;
 left:15px;
 right:15px;
 
-bottom:160px;
+bottom:90px;
 
 background:#fff;
 
@@ -327,4 +329,16 @@ box-shadow:
 max-width:220px;
 border-radius:14px;
 display:block;
+}
+
+/* PROVIDER */
+
+.provider-mode .chat-input{
+bottom:160px;
+}
+
+/* CUSTOMER */
+
+.customer-mode .chat-input{
+bottom:90px;
 }
