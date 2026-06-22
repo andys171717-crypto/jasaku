@@ -382,6 +382,14 @@ await loadRequest();
 
 initRealtimeChat();
 
+document.body.classList.remove(
+"page-loading"
+);
+
+document.body.classList.add(
+"page-ready"
+);
+
 const acceptBtn =
 document.getElementById(
 "acceptBtn"
