@@ -42,6 +42,9 @@ let isProvider = false;
 let firstLoad = true;
 let lastMessageCount = 0;
 
+const IMGBB_API_KEY =
+"c2e3fcd3251f6d46da391b73e5113cda";
+
 function formatTime(timestamp){
 
 if(!timestamp) return "";
@@ -218,7 +221,17 @@ ${senderName}
 </div>
 
 <div class="bubble-text">
-${msg.text || ""}
+
+${
+msg.type === "image"
+
+? `<img
+src="${msg.imageUrl}"
+class="chat-image">`
+
+: (msg.text || "")
+}
+
 </div>
 
 <div class="message-time">
@@ -277,6 +290,70 @@ currentUser.uid,
 createdAt:
 serverTimestamp()
 }
+);
+
+}
+
+async function uploadImage(file){
+
+const formData =
+new FormData();
+
+formData.append(
+"image",
+file
+);
+
+const response =
+await fetch(
+`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+{
+method:"POST",
+body:formData
+}
+);
+
+const result =
+await response.json();
+
+if(!result.success){
+
+throw new Error(
+"Gagal upload foto"
+);
+
+}
+
+return result.data.url;
+
+}
+
+async function sendImage(file){
+
+const imageUrl =
+await uploadImage(file);
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+type:"image",
+
+imageUrl,
+
+senderId:
+currentUser.uid,
+
+createdAt:
+serverTimestamp()
+}
+
 );
 
 }
@@ -349,6 +426,55 @@ e.preventDefault();
 sendMessage();
 
 }
+
+}
+);
+
+document
+.getElementById(
+"photoBtn"
+)
+.addEventListener(
+"click",
+()=>{
+
+document
+.getElementById(
+"imageInput"
+)
+.click();
+
+}
+);
+
+document
+.getElementById(
+"imageInput"
+)
+.addEventListener(
+"change",
+async(e)=>{
+
+const file =
+e.target.files[0];
+
+if(!file) return;
+
+try{
+
+await sendImage(file);
+
+}catch(err){
+
+console.error(err);
+
+alert(
+"Gagal upload foto"
+);
+
+}
+
+e.target.value = "";
 
 }
 );
