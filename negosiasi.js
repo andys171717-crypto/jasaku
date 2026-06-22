@@ -234,13 +234,17 @@ ${formatTime(msg.createdAt)}
 
 setTimeout(()=>{
 
-chat.scrollTop =
-chat.scrollHeight;
+const lastMessage =
+chat.lastElementChild;
 
-window.scrollTo({
-top: document.body.scrollHeight,
-behavior: "smooth"
+if(lastMessage){
+
+lastMessage.scrollIntoView({
+behavior:"smooth",
+block:"end"
 });
+
+}
 
 },150);
 
