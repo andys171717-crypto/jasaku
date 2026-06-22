@@ -177,6 +177,7 @@ padding:0 6px;
 
 .chat-input{
 position:fixed;
+isolation:isolate;
 
 left:15px;
 right:15px;
@@ -336,27 +337,19 @@ display:block;
 /* PROVIDER */
 
 .provider-mode .chat-input{
-bottom:160px;
+bottom:145px;
 }
 
 /* CUSTOMER */
 
 .customer-mode .chat-input{
-bottom:90px;
+bottom:85px;
 }
 
 .provider-mode .chat-container{
-padding-bottom:230px;
+padding-bottom:140px;
 }
 
 .customer-mode .chat-container{
-padding-bottom:120px;
-}
-
-.chat-input::before{
-content:"";
-position:absolute;
-inset:0;
-background:#fff;
-z-index:-1;
+padding-bottom:70px;
 }
