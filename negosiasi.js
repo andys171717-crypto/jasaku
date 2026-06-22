@@ -228,7 +228,7 @@ msg.type === "image"
 ? `<img
 src="${msg.imageUrl}"
 class="chat-image"
-onclick="window.open('${msg.imageUrl}','_blank')">
+onclick="window.open('${msg.imageUrl}','_blank')">`
 
 : (msg.text || "")
 }
@@ -285,9 +285,13 @@ requestId,
 "messages"
 ),
 {
+type:"text",
+
 text,
+
 senderId:
 currentUser.uid,
+
 createdAt:
 serverTimestamp()
 }
