@@ -239,6 +239,8 @@ flex-shrink:0;
 
 .provider-actions{
 
+display:none;  
+
 position:fixed;
 left:15px;
 right:15px;
