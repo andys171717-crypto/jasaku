@@ -745,5 +745,67 @@ alert(
 }
 );
 
+approveEstimate.addEventListener(
+"click",
+async()=>{
+
+const requestRef =
+doc(
+db,
+"requests",
+requestId
+);
+
+await updateDoc(
+requestRef,
+{
+estimatedStatus:
+"approved",
+
+status:
+"Pengerjaan"
+}
+);
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+type:"system",
+
+systemType:
+"estimate_approved",
+
+text:
+`
+✅ ESTIMASI DISETUJUI
+
+Rp ${requestData.estimatedLaborFee.toLocaleString("id-ID")}
+
+Pekerjaan dapat dimulai
+`,
+
+createdAt:
+serverTimestamp()
+}
+
+);
+
+approvalActions.style.display =
+"none";
+
+alert(
+"Estimasi disetujui"
+);
+
+}
+);   
+    
 }
 );
