@@ -185,6 +185,35 @@ ${buttonText}
 
 }else{
 
+let customerActions = "";
+
+if(
+requestData?.estimatedStatus ===
+"waiting_customer"
+){
+
+customerActions = `
+
+<button
+id="approveEstimateBtn"
+class="status-btn start-btn">
+
+Setuju
+
+</button>
+
+<button
+id="rejectEstimateBtn"
+class="status-btn reject-btn">
+
+Tolak
+
+</button>
+
+`;
+
+}
+
 card.innerHTML = `
 
 <div class="mini-info">
@@ -193,9 +222,15 @@ card.innerHTML = `
 🏢 ${requestData.namaJasa || "-"}
 </span>
 
+<div class="status-actions">
+
 <span>
 🟡 ${requestData.status || "-"}
 </span>
+
+${customerActions}
+
+</div>
 
 </div>
 
