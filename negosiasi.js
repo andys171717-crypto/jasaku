@@ -131,9 +131,21 @@ card.innerHTML = `
 👤 ${requestData.nama || "-"}
 </span>
 
+<div class="status-actions">
+
 <span>
 🟡 ${requestData.status || "-"}
 </span>
+
+<button
+id="topEstimateBtn"
+class="status-btn">
+
+Estimasi
+
+</button>
+
+</div>
 
 </div>
 
@@ -466,17 +478,7 @@ document.body.classList.add(
 );
 
 workflowActions.style.display =
-"flex";
-
-workflowActions.innerHTML = `
-<button
-id="topEstimateBtn"
-class="btn-green">
-
-Ajukan Estimasi
-
-</button>
-`;
+"none";
 
 }else{
 
