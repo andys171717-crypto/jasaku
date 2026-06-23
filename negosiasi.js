@@ -676,7 +676,7 @@ document
 document
 .addEventListener(
 "click",
-(e)=>{
+async (e)=>{
 
 if(
 e.target.id ===
