@@ -123,6 +123,38 @@ document.getElementById(
 
 if(isProvider){
 
+let buttonText =
+"Estimasi";
+
+let buttonClass =
+"status-btn";
+
+if(
+requestData?.estimatedStatus ===
+"waiting_customer"
+){
+
+buttonText =
+"Menunggu";
+
+buttonClass =
+"status-btn waiting-btn";
+
+}
+
+if(
+requestData?.estimatedStatus ===
+"approved"
+){
+
+buttonText =
+"Mulai";
+
+buttonClass =
+"status-btn start-btn";
+
+}
+
 card.innerHTML = `
 
 <div class="mini-info">
@@ -139,9 +171,9 @@ card.innerHTML = `
 
 <button
 id="topEstimateBtn"
-class="status-btn">
+class="${buttonClass}">
 
-Estimasi
+${buttonText}
 
 </button>
 
@@ -608,6 +640,19 @@ e.target.id ===
 "topEstimateBtn"
 ){
 
+if(
+requestData?.estimatedStatus ===
+"waiting_customer"
+){
+
+alert(
+"Estimasi sedang menunggu persetujuan customer"
+);
+
+return;
+
+}
+
 estimateModal.style.display =
 "flex";
 
@@ -667,6 +712,11 @@ estimatedStatus:
 "waiting_customer"
 }
 );
+
+requestData.estimatedStatus =
+"waiting_customer";
+
+await loadRequest();
 
 await addDoc(
 
