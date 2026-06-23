@@ -858,7 +858,7 @@ amount <= 0
 ){
 
 alert(
-"Masukkan estimasi terlebih dahulu"
+"Masukkan harga kesepakatan terlebih dahulu"
 );
 
 return;
@@ -907,11 +907,9 @@ amount,
 
 text:
 `
-💰 ESTIMASI UPAH JASA AWAL
+🤝 HARGA KESEPAKATAN AWAL
 
 Rp ${amount.toLocaleString("id-ID")}
-
-Menunggu Persetujuan Customer
 `,
 
 createdAt:
@@ -928,7 +926,7 @@ document.getElementById(
 ).value = "";
 
 alert(
-"Estimasi berhasil diajukan"
+"Harga kesepakatan berhasil disimpan"
 );
 
 }
