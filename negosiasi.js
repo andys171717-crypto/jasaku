@@ -159,15 +159,19 @@ card.innerHTML = `
 
 <div class="mini-info">
 
-<span>
+<div class="info-left">
+
+<div class="info-name">
 👤 ${requestData.nama || "-"}
-</span>
+</div>
 
-<div class="status-actions">
-
-<span>
+<div class="info-status">
 🟡 ${requestData.status || "-"}
-</span>
+</div>
+
+</div>
+
+<div class="info-right">
 
 <button
 id="topEstimateBtn"
@@ -218,15 +222,19 @@ card.innerHTML = `
 
 <div class="mini-info">
 
-<span>
+<div class="info-left">
+
+<div class="info-name">
 🏢 ${requestData.namaJasa || "-"}
-</span>
+</div>
 
-<div class="status-actions">
-
-<span>
+<div class="info-status">
 🟡 ${requestData.status || "-"}
-</span>
+</div>
+
+</div>
+
+<div class="info-right">
 
 ${customerActions}
 
