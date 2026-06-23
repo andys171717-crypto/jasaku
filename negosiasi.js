@@ -248,6 +248,31 @@ ${customerActions}
 
 }
 
+function initRealtimeRequest(){
+
+const requestRef =
+doc(
+db,
+"requests",
+requestId
+);
+
+onSnapshot(
+requestRef,
+(snapshot)=>{
+
+if(!snapshot.exists()) return;
+
+requestData =
+snapshot.data();
+
+loadRequest();
+
+}
+);
+
+}
+
 function initRealtimeChat(){
 
 const messagesRef =
@@ -303,9 +328,19 @@ chat.innerHTML += `
 
 <div class="system-message">
 
+<div>
+
 <div class="system-card">
 
 ${msg.text || ""}
+
+</div>
+
+<div class="message-time">
+
+${formatTime(msg.createdAt)}
+
+</div>
 
 </div>
 
@@ -505,6 +540,8 @@ return;
 currentUser = user;
 
 await loadRequest();
+
+initRealtimeRequest();
 
 initRealtimeChat();
 
@@ -753,6 +790,19 @@ requestData?.estimatedStatus ===
 
 alert(
 "Estimasi sedang menunggu persetujuan customer"
+);
+
+return;
+
+}
+
+if(
+requestData?.estimatedStatus ===
+"approved"
+){
+
+alert(
+"Estimasi sudah disetujui, lanjut ke proses pekerjaan"
 );
 
 return;
