@@ -770,32 +770,6 @@ e.target.id ===
 "topEstimateBtn"
 ){
 
-if(
-requestData?.estimatedStatus ===
-"waiting_customer"
-){
-
-alert(
-"Estimasi sedang menunggu persetujuan customer"
-);
-
-return;
-
-}
-
-if(
-requestData?.estimatedStatus ===
-"approved"
-){
-
-alert(
-"Estimasi sudah disetujui, lanjut ke proses pekerjaan"
-);
-
-return;
-
-}
-
 estimateModal.style.display =
 "flex";
 
