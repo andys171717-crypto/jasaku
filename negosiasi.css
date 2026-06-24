@@ -5,7 +5,7 @@ margin:0;
 background:#f5f7fb;
 font-family:Arial,sans-serif;
 
-padding-bottom:180px;
+padding-bottom:0;
 }
 
 .sticky-area{
@@ -391,7 +391,7 @@ background:transparent;
 
 .chat-container{
 
-padding-bottom:70px;
+padding-bottom:140px;
 
 }
 
