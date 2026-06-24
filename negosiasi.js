@@ -613,6 +613,16 @@ document.getElementById(
 "sendBilling"
 );
 
+const materialFeeInput =
+document.getElementById(
+"materialFee"
+);
+
+const materialNoteInput =
+document.getElementById(
+"materialNote"
+);
+
 const providerActions =
 document.querySelector(
 ".provider-actions"
@@ -746,6 +756,29 @@ document
 "imageInput"
 )
 .value = "";
+
+}
+);
+
+materialFeeInput.addEventListener(
+"input",
+()=>{
+
+const value =
+parseInt(
+materialFeeInput.value
+) || 0;
+
+materialNoteInput.style.display =
+value > 0
+? "block"
+: "none";
+
+if(value <= 0){
+
+materialNoteInput.value = "";
+
+}
 
 }
 );
