@@ -422,10 +422,7 @@ chat.lastElementChild;
 
 if(lastMessage){
 
-lastMessage.scrollIntoView({
-behavior:"smooth",
-block:"end"
-});
+chat.scrollTop = chat.scrollHeight;
 
 }
 
