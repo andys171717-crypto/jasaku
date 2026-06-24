@@ -2,42 +2,238 @@
 
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Notifikasi - JasaKita</title>
+<title>Negosiasi Permintaan</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="negosiasi.css">
 
-<link rel="stylesheet" href="notifikasi.css">
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 </head>
 
-<body>
+<body class="page-loading">
 
-<div class="notif-header">
+<div class="sticky-area">
 
-<a href="index.html" class="back-btn">
+<div class="header">
+
+<a id="backBtn" href="requests.html">
 <i class="fa-solid fa-arrow-left"></i>
 </a>
 
-<h1>Notifikasi</h1>
+<div class="header-content">
+<h1>Negosiasi</h1>
+<p>Diskusi pekerjaan & harga</p>
+</div>
 
 </div>
 
-<div id="notifList">
+<div id="requestInfo" class="request-card">
+Loading...
+</div>
 
-<div class="empty-state">
+<div
+id="workflowActions"
+class="workflow-actions"
+style="display:none;">
 
-<i class="fa-regular fa-bell"></i>
+</div>
 
-<h3>Belum Ada Notifikasi</h3>
+</div>
 
-<p>
-Semua informasi penting,
-pesanan, promo, dan update akun
-akan muncul di sini.
-</p>
+<div
+id="chatMessages"
+class="chat-container">
+
+</div>
+
+<div
+id="approvalActions"
+class="approval-actions"
+style="display:none;">
+
+<button
+id="approveEstimate">
+
+Setuju
+
+</button>
+
+<button
+id="rejectEstimate">
+
+Tolak
+
+</button>
+
+</div>
+
+<div
+id="imagePreview"
+class="image-preview"
+style="display:none;">
+
+<img id="previewImg">
+
+<button
+id="removePreview"
+type="button">
+
+✕
+
+</button>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="file"
+id="imageInput"
+accept="image/*"
+style="display:none;">
+
+<button
+id="photoBtn"
+type="button">
+
+<i class="fa-solid fa-camera"></i>
+
+</button>
+
+<input
+type="text"
+id="messageInput"
+placeholder="Tulis pesan...">
+
+<button
+id="sendBtn"
+type="button">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
+
+</div>
+
+<div class="provider-actions">
+
+<button id="acceptBtn">
+
+Terima Permintaan
+
+</button>
+
+</div>
+
+<div
+id="estimateModal"
+class="estimate-modal"
+style="display:none;">
+
+<div class="estimate-content">
+
+<h3>
+Harga Kesepakatan Awal
+</h3>
+
+<input
+type="number"
+id="estimateInput"
+placeholder="Masukkan harga kesepakatan">
+
+<div class="estimate-actions">
+
+<button
+id="cancelEstimate">
+
+Batal
+
+</button>
+
+<button
+id="saveEstimate">
+
+Mulai Pekerjaan
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+id="billingModal"
+class="estimate-modal"
+style="display:none;">
+
+<div class="estimate-content">
+
+<h3>
+Buat Tagihan Akhir
+</h3>
+
+<input
+type="number"
+id="additionalCost"
+placeholder="Biaya Tambahan (Opsional)">
+
+<br><br>
+
+<input
+type="text"
+id="additionalCostNote"
+placeholder="Keterangan Biaya Tambahan">
+
+<br><br>
+
+<textarea
+id="workNotes"
+placeholder="Catatan pekerjaan"
+style="
+width:100%;
+height:100px;
+padding:10px;
+border:1px solid #ddd;
+border-radius:12px;
+box-sizing:border-box;
+"></textarea>
+
+<br><br>
+
+<label>
+📷 Foto Bukti (Opsional)
+</label>
+
+<input
+type="file"
+id="billingPhoto"
+accept="image/*">
+
+<div class="estimate-actions">
+
+<button
+id="cancelBilling">
+
+Batal
+
+</button>
+
+<button
+id="sendBilling">
+
+Kirim Tagihan
+
+</button>
+
+</div>
 
 </div>
 
@@ -45,89 +241,32 @@ akan muncul di sini.
 
 <nav class="bottom-nav">
 
-<a href="index.html" class="nav-item">
+<a href="index.html">
 <i class="fa-solid fa-house"></i>
-<small>Beranda</small>
+<span>Beranda</span>
 </a>
 
-<a href="#" class="nav-item">
+<a href="index.html#search">
 <i class="fa-solid fa-magnifying-glass"></i>
-<small>Cari</small>
+<span>Cari</span>
 </a>
 
-<a href="notifikasi.html" class="nav-item active">
-<i class="fa-solid fa-bell"></i>
-<small>Notifikasi</small>
+<a href="pesanan.html" class="active">
+<i class="fa-solid fa-clipboard-list"></i>
+<span>Pesanan</span>
 </a>
 
-<a href="#" id="btnAkun" class="nav-item">
+<a href="akun.html">
 <i class="fa-solid fa-user"></i>
-<small>Akun</small>
+<span>Akun</span>
 </a>
 
 </nav>
 
 <script
 type="module"
-src="notifikasi.js">
+src="negosiasi.js">
 </script>
-
-<style>
-
-.custom-toast{
-
-position:fixed;
-
-left:50%;
-bottom:100px;
-
-transform:
-translateX(-50%)
-translateY(20px);
-
-background:
-linear-gradient(
-135deg,
-#2563eb,
-#4f46e5
-);
-
-color:white;
-
-padding:14px 18px;
-
-border-radius:14px;
-
-font-size:14px;
-
-font-weight:600;
-
-box-shadow:
-0 10px 25px rgba(0,0,0,.2);
-
-opacity:0;
-
-transition:.3s;
-
-z-index:99999;
-
-max-width:85%;
-
-text-align:center;
-
-}
-
-.custom-toast.show{
-
-opacity:1;
-
-transform:
-translateX(-50%)
-translateY(0);
-
-}
-
-</style>
 
 </body>
 </html>
