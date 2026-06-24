@@ -167,8 +167,15 @@ box-shadow:
 }
 
 .message.provider .bubble-text{
-background:#4f46e5;
+
+background:linear-gradient(
+135deg,
+#2563eb,
+#4f46e5
+);
+
 color:#fff;
+
 }
 
 .bubble-text:has(.chat-image){
@@ -214,7 +221,7 @@ z-index:999;
 
 .chat-input{
 
-bottom:95px;
+bottom:88px;
 
 }
 
@@ -247,7 +254,10 @@ border:none;
 
 border-radius:16px;
 
-background:#4f46e5;
+background:linear-gradient(
+135deg,
+#2563eb,
+#4f46e5
 
 color:#ffffff;
 
@@ -380,7 +390,7 @@ background:transparent;
 
 .chat-container{
 
-padding-bottom:140px;
+padding-bottom:70px;
 
 }
 
