@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Negosiasi Permintaan</title>
+
+<link rel="stylesheet" href="negosiasi.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body class="page-loading">
+
+<div class="sticky-area">
+
+<div class="header">
+
+<a id="backBtn" href="requests.html">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<div class="header-content">
+<h1>Negosiasi</h1>
+<p>Diskusi pekerjaan & harga</p>
+</div>
+
+</div>
+
+<div id="requestInfo" class="request-card">
+Loading...
+</div>
+
+<div
+id="workflowActions"
+class="workflow-actions"
+style="display:none;">
+
+</div>
+
+</div>
+
+<div
+id="chatMessages"
+class="chat-container">
+
+</div>
+
+<div
+id="approvalActions"
+class="approval-actions"
+style="display:none;">
+
+<button
+id="approveEstimate">
+
+Setuju
+
+</button>
+
+<button
+id="rejectEstimate">
+
+Tolak
+
+</button>
+
+</div>
+
+<div
+id="imagePreview"
+class="image-preview"
+style="display:none;">
+
+<img id="previewImg">
+
+<button
+id="removePreview"
+type="button">
+
+✕
+
+</button>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="file"
+id="imageInput"
+accept="image/*"
+style="display:none;">
+
+<button
+id="photoBtn"
+type="button">
+
+<i class="fa-solid fa-camera"></i>
+
+</button>
+
+<input
+type="text"
+id="messageInput"
+placeholder="Tulis pesan...">
+
+<button
+id="sendBtn"
+type="button">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
+
+</div>
+
+<div class="provider-actions">
+
+<button id="acceptBtn">
+
+Terima Permintaan
+
+</button>
+
+</div>
+
+<div
+id="estimateModal"
+class="estimate-modal"
+style="display:none;">
+
+<div class="estimate-content">
+
+<h3>
+Harga Kesepakatan Awal
+</h3>
+
+<input
+type="number"
+id="estimateInput"
+placeholder="Masukkan harga kesepakatan">
+
+<div class="estimate-actions">
+
+<button
+id="cancelEstimate">
+
+Batal
+
+</button>
+
+<button
+id="saveEstimate">
+
+Mulai Pekerjaan
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+id="billingModal"
+class="estimate-modal"
+style="display:none;">
+
+<div class="estimate-content">
+
+<h3>
+Buat Tagihan Akhir
+</h3>
+
+<input
+type="number"
+id="extraServiceFee"
+placeholder="Jasa Tambahan">
+
+<br><br>
+
+<input
+type="number"
+id="replacementPartFee"
+placeholder="Barang Pengganti">
+
+<br><br>
+
+<textarea
+id="workNotes"
+placeholder="Catatan pekerjaan"
+style="
+width:100%;
+height:100px;
+padding:10px;
+border:1px solid #ddd;
+border-radius:12px;
+box-sizing:border-box;
+"></textarea>
+
+<br><br>
+
+<label>
+📷 Foto Bukti (Opsional)
+</label>
+
+<input
+type="file"
+id="billingPhoto"
+accept="image/*">
+
+<div class="estimate-actions">
+
+<button
+id="cancelBilling">
+
+Batal
+
+</button>
+
+<button
+id="sendBilling">
+
+Kirim Tagihan
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<nav class="bottom-nav">
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+<span>Beranda</span>
+</a>
+
+<a href="index.html#search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span>Cari</span>
+</a>
+
+<a href="pesanan.html" class="active">
+<i class="fa-solid fa-clipboard-list"></i>
+<span>Pesanan</span>
+</a>
+
+<a href="akun.html">
+<i class="fa-solid fa-user"></i>
+<span>Akun</span>
+</a>
+
+</nav>
+
+<script
+type="module"
+src="negosiasi.js">
+</script>
+
+</body>
+</html>
