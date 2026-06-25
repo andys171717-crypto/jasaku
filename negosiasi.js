@@ -681,11 +681,6 @@ sendMessage();
 }
 );
 
-const photoPicker =
-document.getElementById(
-"photoPicker"
-);
-
 document
 .getElementById(
 "photoBtn"
@@ -694,61 +689,19 @@ document
 "click",
 ()=>{
 
-photoPicker.style.display =
-"flex";
+document
+.getElementById(
+"imageInput"
+)
+.click();
 
 }
 );
 
 document
 .getElementById(
-"cancelPhoto"
+"imageInput"
 )
-.onclick=()=>{
-
-photoPicker.style.display =
-"none";
-
-};
-
-document
-.getElementById(
-"openCamera"
-)
-.onclick=()=>{
-
-photoPicker.style.display =
-"none";
-
-document
-.getElementById(
-"cameraInput"
-)
-.click();
-
-};
-
-document
-.getElementById(
-"openGallery"
-)
-.onclick=()=>{
-
-photoPicker.style.display =
-"none";
-
-document
-.getElementById(
-"galleryInput"
-)
-.click();
-
-};
-
-["cameraInput","galleryInput"].forEach(id=>{
-
-document
-.getElementById(id)
 .addEventListener(
 "change",
 (e)=>{
@@ -776,16 +729,15 @@ URL.createObjectURL(file);
 preview.style.display =
 "flex";
 
-e.target.value="";
+e.target.value = "";
 
 }
-
 );
 
-});
-
 document
-.getElementById("removePreview")
+.getElementById(
+"removePreview"
+)
 .addEventListener(
 "click",
 ()=>{
@@ -793,8 +745,17 @@ document
 selectedImage = null;
 
 document
-.getElementById("imagePreview")
-.style.display = "none";
+.getElementById(
+"imagePreview"
+)
+.style.display =
+"none";
+
+document
+.getElementById(
+"imageInput"
+)
+.value = "";
 
 }
 );
