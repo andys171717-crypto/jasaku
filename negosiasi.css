@@ -728,8 +728,9 @@ min-width:90px;
 
 .billing-content{
     width:min(92vw,430px);
-    max-height:90vh;
+    max-height:82vh;
     overflow-y:auto;
+    margin:40px auto;
     background:#fff;
     border-radius:24px;
     padding:22px;
@@ -848,9 +849,10 @@ min-width:90px;
 @media(max-width:480px){
 
 .billing-content{
-    width:95vw;
+    width:92vw;
+    max-height:78vh;
     padding:18px;
-    border-radius:20px;
+    border-radius:22px;
 }
 
 .billing-title h3{
