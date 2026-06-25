@@ -721,3 +721,145 @@ color:#92400e;
 min-width:90px;
 
 }
+
+/* ===========================
+   BILLING MODAL (JASKIT)
+=========================== */
+
+.billing-content{
+    width:min(92vw,430px);
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:24px;
+    padding:22px;
+    box-sizing:border-box;
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+
+.billing-title h3{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+    color:#111827;
+}
+
+.billing-title p{
+    margin:8px 0 20px;
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.billing-card{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:16px;
+}
+
+.billing-card label{
+    font-size:14px;
+    font-weight:700;
+    color:#374151;
+    margin-bottom:8px;
+}
+
+.billing-card input,
+.billing-card textarea{
+    width:100%;
+    box-sizing:border-box;
+    border:1px solid #dbe3ee;
+    border-radius:14px;
+    background:#fff;
+    padding:14px;
+    font-size:15px;
+    transition:.2s;
+}
+
+.billing-card input:focus,
+.billing-card textarea:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+.billing-card textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.billing-summary{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:16px;
+    margin-top:8px;
+}
+
+.summary-header{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:8px 0;
+    color:#374151;
+}
+
+.summary-divider{
+    height:1px;
+    background:#e5e7eb;
+    margin:14px 0;
+}
+
+.summary-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:18px;
+    font-weight:700;
+    color:#111827;
+}
+
+#cancelBilling{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+#sendBilling{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:#fff;
+}
+
+#cancelBilling,
+#sendBilling{
+    height:50px;
+    border:none;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+@media(max-width:480px){
+
+.billing-content{
+    width:95vw;
+    padding:18px;
+    border-radius:20px;
+}
+
+.billing-title h3{
+    font-size:24px;
+}
+
+.billing-card input,
+.billing-card textarea{
+    font-size:16px;
+}
+
+}
