@@ -681,6 +681,11 @@ sendMessage();
 }
 );
 
+const photoPicker =
+document.getElementById(
+"photoPicker"
+);
+
 document
 .getElementById(
 "photoBtn"
@@ -689,21 +694,95 @@ document
 "click",
 ()=>{
 
-document
-.getElementById(
-"imageInput"
-)
-.click();
+photoPicker.style.display =
+"flex";
 
 }
 );
 
 document
 .getElementById(
-"imageInput"
+"cancelPhoto"
 )
+.onclick=()=>{
+
+photoPicker.style.display =
+"none";
+
+};
+
+document
+.getElementById(
+"openCamera"
+)
+.onclick=()=>{
+
+photoPicker.style.display =
+"none";
+
+document
+.getElementById(
+"cameraInput"
+)
+.click();
+
+};
+
+document
+.getElementById(
+"openGallery"
+)
+.onclick=()=>{
+
+photoPicker.style.display =
+"none";
+
+document
+.getElementById(
+"galleryInput"
+)
+.click();
+
+};
+
+["cameraInput","galleryInput"].forEach(id=>{
+
+document
+.getElementById(id)
 .addEventListener(
 "change",
+(e)=>{
+
+const file =
+e.target.files[0];
+
+if(!file) return;
+
+selectedImage = file;
+
+const preview =
+document.getElementById(
+"imagePreview"
+);
+
+const previewImg =
+document.getElementById(
+"previewImg"
+);
+
+previewImg.src =
+URL.createObjectURL(file);
+
+preview.style.display =
+"flex";
+
+e.target.value="";
+
+}
+
+);
+
+});
 (e)=>{
 
 const file =
