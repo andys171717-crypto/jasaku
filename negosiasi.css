@@ -199,7 +199,9 @@ border-radius:18px;
 
 border:1px solid #e5e7eb;
 
-overflow:hidden;
+overflow:visible;
+
+box-sizing:border-box;
 
 box-shadow:
 0 8px 25px rgba(0,0,0,.10);
@@ -209,6 +211,7 @@ z-index:999;
 
 .chat-input input[type="text"]{
 flex:1;
+min-width:0;
 height:48px;
 border:1px solid #ddd;
 border-radius:14px;
@@ -219,6 +222,7 @@ font-size:14px;
 .chat-input button{
 
 width:52px;
+min-width:52px;
 height:48px;
 
 border:none;
