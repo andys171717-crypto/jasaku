@@ -783,40 +783,7 @@ e.target.value="";
 );
 
 });
-(e)=>{
 
-const file =
-e.target.files[0];
-
-if(!file) return;
-
-selectedImage = file;
-
-const preview =
-document.getElementById(
-"imagePreview"
-);
-
-const previewImg =
-document.getElementById(
-"previewImg"
-);
-
-previewImg.src =
-URL.createObjectURL(file);
-
-preview.style.display =
-"flex";
-
-e.target.value = "";
-
-}
-);
-
-document
-.getElementById(
-"removePreview"
-)
 .addEventListener(
 "click",
 ()=>{
