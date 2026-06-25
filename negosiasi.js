@@ -623,6 +623,31 @@ document.getElementById(
 "materialNote"
 );
 
+const extraLaborInput =
+document.getElementById(
+"extraLaborFee"
+);
+
+const agreedPriceText =
+document.getElementById(
+"summaryAgreed"
+);
+
+const laborText =
+document.getElementById(
+"summaryLabor"
+);
+
+const materialText =
+document.getElementById(
+"summaryMaterial"
+);
+
+const totalText =
+document.getElementById(
+"summaryTotal"
+);
+
 const providerActions =
 document.querySelector(
 ".provider-actions"
@@ -760,27 +785,53 @@ document
 }
 );
 
-materialFeeInput.addEventListener(
-"input",
-()=>{
+function updateBillingSummary(){
 
-const value =
-parseInt(
-materialFeeInput.value
-) || 0;
+const agreed =
+requestData?.agreedPrice || 0;
 
-materialNoteInput.style.display =
-value > 0
+const labor =
+parseInt(extraLaborInput.value) || 0;
+
+const material =
+parseInt(materialFeeInput.value) || 0;
+
+const total =
+agreed + labor + material;
+
+agreedPriceText.textContent =
+"Rp " + agreed.toLocaleString("id-ID");
+
+laborText.textContent =
+"Rp " + labor.toLocaleString("id-ID");
+
+materialText.textContent =
+"Rp " + material.toLocaleString("id-ID");
+
+totalText.textContent =
+"Rp " + total.toLocaleString("id-ID");
+
+materialNoteInput.parentElement.style.display =
+material > 0
 ? "block"
 : "none";
 
-if(value <= 0){
+if(material<=0){
 
-materialNoteInput.value = "";
+materialNoteInput.value="";
+
+}
 
 }
 
-}
+extraLaborInput.addEventListener(
+"input",
+updateBillingSummary
+);
+
+materialFeeInput.addEventListener(
+"input",
+updateBillingSummary
 );
 
 document
@@ -870,6 +921,8 @@ e.target.id ===
 
 billingModal.style.display =
 "flex";
+
+updateBillingSummary();
 
 return;
 
