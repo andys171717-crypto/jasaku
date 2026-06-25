@@ -347,6 +347,87 @@ isProvider
 : "Mitra"
 );
 
+if(msg.type==="billing"){
+
+const bill=msg.billing;
+
+chat.innerHTML+=`
+
+<div class="system-message">
+
+<div class="system-card">
+
+<h3 style="margin-top:0;">
+🧾 Tagihan Akhir
+</h3>
+
+<div style="text-align:left;line-height:1.8;">
+
+<b>Harga Kesepakatan</b><br>
+Rp ${bill.agreedPrice.toLocaleString("id-ID")}<br><br>
+
+<b>Jasa Tambahan</b><br>
+Rp ${bill.extraLabor.toLocaleString("id-ID")}<br><br>
+
+<b>Material</b><br>
+Rp ${bill.materialFee.toLocaleString("id-ID")}<br>
+
+${bill.materialName||"-"}<br><br>
+
+<b>Catatan</b><br>
+
+${bill.workNotes||"-"}
+
+<br><br>
+
+<b>Total Tagihan</b>
+
+<h2 style="margin:6px 0;">
+
+Rp ${bill.total.toLocaleString("id-ID")}
+
+</h2>
+
+${
+bill.photoUrl
+?
+
+`<img
+src="${bill.photoUrl}"
+style="
+width:100%;
+border-radius:12px;
+margin-top:10px;
+">`
+
+:
+
+""
+
+}
+
+<div style="
+margin-top:15px;
+font-weight:bold;
+color:#2563eb;
+">
+
+Menunggu Pembayaran
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+return;
+
+}
+
 if(msg.type === "system"){
 
 chat.innerHTML += `
@@ -1130,6 +1211,31 @@ billing:billingData,
 workflowStatus:"billing_review",
 
 status:"Menunggu Pembayaran"
+
+}
+
+);
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+
+type:"billing",
+
+billing:billingData,
+
+senderId:
+currentUser.uid,
+
+createdAt:
+serverTimestamp()
 
 }
 
