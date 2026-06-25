@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Pembayaran - JasKit
+</title>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="payment.css">
+
+</head>
+
+<body>
+
+<div class="sticky-area">
+
+<div class="header">
+
+<a
+id="backBtn"
+href="javascript:history.back()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+</a>
+
+<div class="header-content">
+
+<h1>
+
+Pembayaran
+
+</h1>
+
+<p>
+
+Pilih metode pembayaran
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="payment-container">
+
+<div class="progress-card">
+
+<div class="progress-title">
+
+Status Transaksi
+
+</div>
+
+<div class="progress-flow">
+
+<div class="step done">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-comments"></i>
+
+</div>
+
+<span>
+
+Negosiasi
+
+</span>
+
+</div>
+
+<div class="step-line active"></div>
+
+<div class="step done">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-handshake"></i>
+
+</div>
+
+<span>
+
+Harga
+
+</span>
+
+</div>
+
+<div class="step-line active"></div>
+
+<div class="step done">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-screwdriver-wrench"></i>
+
+</div>
+
+<span>
+
+Pengerjaan
+
+</span>
+
+</div>
+
+<div class="step-line active"></div>
+
+<div class="step active">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-credit-card"></i>
+
+</div>
+
+<span>
+
+Pembayaran
+
+</span>
+
+</div>
+
+<div class="step-line"></div>
+
+<div class="step">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+<span>
+
+Selesai
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="total-card">
+
+<div class="total-label">
+
+TOTAL TAGIHAN
+
+</div>
+
+<div
+id="totalAmount"
+class="total-price">
+
+Rp 0
+
+</div>
+
+<div
+id="paymentStatus"
+class="payment-status">
+
+Menunggu Pembayaran
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<h3>
+
+Ringkasan Tagihan
+
+</h3>
+
+<div class="summary-row">
+
+<span>
+
+Harga Kesepakatan
+
+</span>
+
+<strong
+id="agreedPrice">
+
+Rp 0
+
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>
+
+Jasa Tambahan
+
+</span>
+
+<strong
+id="extraLabor">
+
+Rp 0
+
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>
+
+Material
+
+</span>
+
+<strong
+id="materialFee">
+
+Rp 0
+
+</strong>
+
+</div>
+
+<div
+id="materialNameBox"
+class="material-name">
+
+-
+
+</div>
+
+<div class="summary-divider"></div>
+
+<div class="summary-row total-row">
+
+<span>
+
+Total
+
+</span>
+
+<strong
+id="summaryTotal">
+
+Rp 0
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="payment-method-card">
+
+<h3>
+
+Metode Pembayaran
+
+</h3>
+
+<label class="payment-option active">
+
+<input
+type="radio"
+name="paymentMethod"
+value="cash"
+checked>
+
+<div class="payment-info">
+
+<div class="payment-icon cash">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+</div>
+
+<div>
+
+<h4>
+
+Tunai
+
+</h4>
+
+<p>
+
+Bayar langsung kepada mitra setelah pekerjaan selesai.
+
+</p>
+
+</div>
+
+</div>
+
+</label>
+
+<label class="payment-option disabled">
+
+<input
+type="radio"
+name="paymentMethod"
+value="noncash"
+disabled>
+
+<div class="payment-info">
+
+<div class="payment-icon digital">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<div>
+
+<h4>
+
+Non Tunai
+
+</h4>
+
+<p>
+
+Segera hadir
+
+</p>
+
+<span class="coming-soon">
+
+QRIS • Virtual Account • JasKit Pay
+
+</span>
+
+</div>
+
+</div>
+
+</label>
+
+</div>
+
+<div class="action-card">
+
+<button
+id="payButton">
+
+Bayar Sekarang
+
+</button>
+
+<button
+id="cancelButton">
+
+Kembali ke Negosiasi
+
+</button>
+
+</div>
+
+</div>
+
+<nav class="bottom-nav">
+
+<a
+href="index.html"
+class="nav-item">
+
+<i class="fa-solid fa-house"></i>
+
+<small>
+
+Beranda
+
+</small>
+
+</a>
+
+<a
+href="index.html#search"
+class="nav-item">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<small>
+
+Cari
+
+</small>
+
+</a>
+
+<a
+href="pesanan.html"
+class="nav-item active">
+
+<i class="fa-solid fa-clipboard-list"></i>
+
+<small>
+
+Pesanan
+
+</small>
+
+</a>
+
+<a
+href="akun.html"
+class="nav-item">
+
+<i class="fa-solid fa-user"></i>
+
+<small>
+
+Akun
+
+</small>
+
+</a>
+
+</nav>
+
+<script
+type="module"
+src="payment.js">
+</script>
+
+</body>
+
+</html>
