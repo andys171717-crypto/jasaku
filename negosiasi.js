@@ -1113,6 +1113,89 @@ return;
 
 }
 
+if(
+e.target.id==="confirmPaymentBtn"
+){
+
+try{
+
+await updateDoc(
+
+doc(
+db,
+"requests",
+requestId
+),
+
+{
+
+workflowStatus:
+"completed",
+
+status:
+"Selesai",
+
+payment:{
+
+...requestData.payment,
+
+status:
+"paid",
+
+confirmedAt:
+serverTimestamp(),
+
+confirmedBy:
+currentUser.uid
+
+}
+
+}
+
+);
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+
+type:"system",
+
+text:
+"✅ Pembayaran telah dikonfirmasi oleh Mitra. Transaksi selesai.",
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+alert(
+"Pembayaran berhasil dikonfirmasi."
+);
+
+}
+catch(err){
+
+console.error(err);
+
+alert(
+"Gagal mengonfirmasi pembayaran."
+);
+
+}
+
+return;
+
+}
+
 }
 );
 
