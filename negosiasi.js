@@ -2,9 +2,11 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 
 import {
+
 getFirestore,
 doc,
 getDoc,
+getDocs,
 updateDoc,
 collection,
 addDoc,
@@ -12,6 +14,7 @@ query,
 orderBy,
 onSnapshot,
 serverTimestamp
+
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
@@ -1545,9 +1548,12 @@ alert(
 
 if(file){
 
-uploadImage(file)
+(async()=>{
 
-.then(async(url)=>{
+try{
+
+const url=
+await uploadImage(file);
 
 const newBilling={
 
@@ -1573,7 +1579,51 @@ billing:newBilling
 
 );
 
-}).catch(console.error);
+// update pesan billing yang terakhir
+
+const billingQuery=
+query(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+orderBy(
+"createdAt",
+"desc"
+)
+
+);
+
+const billingSnap=
+await getDocs(billingQuery);
+
+if(!billingSnap.empty){
+
+await updateDoc(
+
+billingSnap.docs[0].ref,
+
+{
+
+billing:newBilling
+
+}
+
+);
+
+}
+
+}catch(err){
+
+console.error(err);
+
+}
+
+})();
 
 }
 
