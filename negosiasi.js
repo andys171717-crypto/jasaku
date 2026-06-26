@@ -148,11 +148,26 @@ workflowStatus ===
 "billing_review"
 ){
 
+if(
+requestData.payment?.status ===
+"waiting_confirmation"
+){
+
+buttonText =
+"Konfirmasi Bayar";
+
+buttonClass =
+"status-btn btn-green";
+
+}else{
+
 buttonText =
 "Menunggu";
 
 buttonClass =
 "status-btn waiting-btn";
+
+}
 
 }
 
@@ -222,12 +237,37 @@ Buat Tagihan
 
 `
 
+${
+buttonText==="Konfirmasi Bayar"
+
+?
+
+`
+
+<button
+id="confirmPaymentBtn"
+class="${buttonClass}">
+
+💰 Konfirmasi Pembayaran
+
+</button>
+
+`
+
+:
+
+`
+
 <button
 class="${buttonClass}">
 
 ${buttonText}
 
 </button>
+
+`
+
+}
 
 `
 
