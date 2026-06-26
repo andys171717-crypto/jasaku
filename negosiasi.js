@@ -768,10 +768,6 @@ return;
 
 if(msg.type === "system"){
 
-...
-
-if(msg.type === "system"){
-
 chat.innerHTML += `
 
 <div class="system-message">
@@ -970,11 +966,6 @@ serverTimestamp()
 
 );
 
-}
-
-async function sendImage(file){
-
-...
 }
 
 async function sendLocation(){
