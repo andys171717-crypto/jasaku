@@ -718,6 +718,58 @@ return;
 
 }
 
+if(msg.type==="location"){
+
+chat.innerHTML+=`
+
+<div class="message ${
+isMine
+?
+"provider"
+:
+"customer"
+}">
+
+<div class="sender">
+
+${senderName}
+
+</div>
+
+<div class="bubble-text">
+
+📍 <b>Lokasi Dibagikan</b>
+
+<br><br>
+
+<a
+href="${msg.mapUrl}"
+target="_blank">
+
+Buka Google Maps
+
+</a>
+
+</div>
+
+<div class="message-time">
+
+${formatTime(msg.createdAt)}
+
+</div>
+
+</div>
+
+`;
+
+return;
+
+}
+
+if(msg.type === "system"){
+
+...
+
 if(msg.type === "system"){
 
 chat.innerHTML += `
@@ -914,6 +966,76 @@ currentUser.uid,
 
 createdAt:
 serverTimestamp()
+}
+
+);
+
+}
+
+async function sendImage(file){
+
+...
+}
+
+async function sendLocation(){
+
+if(!navigator.geolocation){
+
+alert("Browser tidak mendukung GPS.");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+async(position)=>{
+
+const lat=position.coords.latitude;
+
+const lng=position.coords.longitude;
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+
+type:"location",
+
+latitude:lat,
+
+longitude:lng,
+
+mapUrl:`https://www.google.com/maps?q=${lat},${lng}`,
+
+senderId:currentUser.uid,
+
+createdAt:serverTimestamp()
+
+}
+
+);
+
+},
+
+()=>{
+
+alert("Lokasi tidak berhasil diambil.");
+
+},
+
+{
+
+enableHighAccuracy:true,
+
+timeout:10000
+
 }
 
 );
@@ -1150,9 +1272,7 @@ document
 "attachmentMenu"
 ).style.display="none";
 
-alert(
-"Fitur kirim lokasi akan kita aktifkan pada tahap berikutnya."
-);
+sendLocation();
 
 }
 );
