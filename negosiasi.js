@@ -1461,17 +1461,10 @@ parseInt(materialFeeInput.value)||0;
 const total =
 agreed+labor+material;
 
-let photoUrl="";
-
 const file =
 billingPhotoInput.files[0];
 
-if(file){
-
-photoUrl =
-await uploadImage(file);
-
-}
+let photoUrl="";
 
 const billingData={
 
@@ -1544,11 +1537,45 @@ serverTimestamp()
 
 );
 
+billingModal.style.display="none";
+
 alert(
 "Tagihan berhasil disimpan."
 );
 
-billingModal.style.display="none";
+if(file){
+
+uploadImage(file)
+
+.then(async(url)=>{
+
+const newBilling={
+
+...billingData,
+
+photoUrl:url
+
+};
+
+await updateDoc(
+
+doc(
+db,
+"requests",
+requestId
+),
+
+{
+
+billing:newBilling
+
+}
+
+);
+
+}).catch(console.error);
+
+}
 
 }
 catch(err){
