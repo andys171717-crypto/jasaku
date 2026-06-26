@@ -165,10 +165,10 @@ workflowStatus ===
 ){
 
 buttonText =
-"Menunggu Konfirmasi";
+"Konfirmasi Pembayaran";
 
 buttonClass =
-"status-btn waiting-btn";
+"status-btn btn-green";
 
 }
 
@@ -249,13 +249,29 @@ Buat Tagihan
 
 :
 
+workflowStatus === "payment_confirmation"
+
+? `
+
+<button
+id="confirmPaymentBtn"
+class="status-btn btn-green">
+
+💰 Konfirmasi Pembayaran
+
+</button>
+
+`
+
+:
+
 workflowStatus === "payment_confirmed"
 
 ? `
 
 <button
 id="finishOrderBtn"
-class="${buttonClass}">
+class="status-btn btn-green">
 
 ✅ Selesaikan Pesanan
 
@@ -635,6 +651,9 @@ requestData.payment?.status==="waiting_confirmation"
 
 ${
 isProvider
+?
+
+requestData.workflowStatus==="payment_confirmation"
 
 ?
 
@@ -654,6 +673,34 @@ style="margin-top:18px;">
 :
 
 `
+
+<div
+class="payment-hint"
+style="
+background:#dcfce7;
+color:#166534;
+font-weight:700;
+">
+
+✔ Pembayaran Sudah Dikonfirmasi
+
+</div>
+
+`
+
+:
+
+`
+
+<div
+class="payment-hint">
+
+Menunggu konfirmasi Mitra
+
+</div>
+
+`
+}
 
 <div
 class="payment-hint">
