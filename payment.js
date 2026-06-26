@@ -6,6 +6,8 @@ getFirestore,
 doc,
 getDoc,
 updateDoc,
+collection,
+addDoc,
 serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
@@ -250,6 +252,41 @@ paymentStatus:
 
 status:
 "Menunggu Konfirmasi Mitra"
+
+}
+
+);
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+
+type:"payment",
+
+payment:{
+
+method:"cash",
+
+amount:
+requestData.billing.total,
+
+status:
+"waiting_confirmation"
+
+},
+
+senderId:
+currentUser.uid,
+
+createdAt:
+serverTimestamp()
 
 }
 
