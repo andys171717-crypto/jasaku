@@ -651,7 +651,10 @@ requestData.payment?.status==="waiting_confirmation"
 
 ${
 isProvider
+
 ?
+
+(
 
 requestData.workflowStatus==="payment_confirmation"
 
@@ -688,19 +691,11 @@ font-weight:700;
 
 `
 
+)
+
 :
 
 `
-
-<div
-class="payment-hint">
-
-Menunggu konfirmasi Mitra
-
-</div>
-
-`
-}
 
 <div
 class="payment-hint">
