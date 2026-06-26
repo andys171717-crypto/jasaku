@@ -785,7 +785,10 @@ return;
 
 }
 
-if(msg.type==="rating_request"){
+if(
+msg.type==="rating_request" &&
+requestData.workflowStatus==="waiting_rating"
+){
 
 if(isProvider){
 
@@ -884,6 +887,46 @@ Kirim Rating
 </button>
 
 </div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+return;
+
+}
+
+if(msg.type==="rating_result"){
+
+if(isProvider){
+
+chat.innerHTML+=`
+
+<div class="system-message">
+
+<div class="system-card">
+
+⭐ Customer memberikan rating
+
+<br><br>
+
+<b>${msg.rating}/5</b>
+
+${
+msg.review
+?
+
+`<br><br>${msg.review}`
+
+:
+
+""
+
+}
 
 </div>
 
@@ -1700,10 +1743,11 @@ requestId,
 
 {
 
-type:"system",
+type:"rating_result",
 
-text:
-`⭐ Customer memberikan rating ${rating}/5`,
+rating,
+
+review,
 
 createdAt:
 serverTimestamp()
