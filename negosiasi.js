@@ -1402,6 +1402,30 @@ document
 "click",
 ()=>{
 
+if(requestData?.workflowStatus==="completed"){
+
+alert(
+"Transaksi telah selesai. Percakapan sudah ditutup."
+);
+
+return;
+
+}
+
+document
+.getElementById(
+"attachmentMenu"
+).style.display="none";
+
+document
+.getElementById(
+"imageInput"
+)
+.click();
+
+}
+);
+
 document
 .getElementById(
 "attachmentMenu"
@@ -1423,6 +1447,26 @@ document
 .addEventListener(
 "click",
 ()=>{
+
+if(requestData?.workflowStatus==="completed"){
+
+alert(
+"Transaksi telah selesai. Percakapan sudah ditutup."
+);
+
+return;
+
+}
+
+document
+.getElementById(
+"attachmentMenu"
+).style.display="none";
+
+sendLocation();
+
+}
+);
 
 document
 .getElementById(
