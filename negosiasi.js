@@ -1977,39 +1977,12 @@ requestId
 
 {
 
-workflowStatus:
-"waiting_rating",
+workflowStatus:"waiting_rating",
 
-status:
-"Menunggu Rating",
+status:"Menunggu Rating",
 
-completedAt:
+waitingRatingAt:
 serverTimestamp()
-
-}
-
-);
-
-await addDoc(
-
-collection(
-db,
-"requests",
-requestId,
-"messages"
-),
-
-{
-
-type:"rating_request",
-
-senderId:currentUser.uid,
-
-rating:0,
-
-review:"",
-
-createdAt:serverTimestamp()
 
 }
 
