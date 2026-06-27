@@ -47,6 +47,9 @@ let firstLoad = true;
 let lastMessageCount = 0;
 let selectedImage = null;
 let selectedRating = 0;
+let ratingContainer = null;
+let ratingReview = null;
+let ratingStars = [];
 
 const IMGBB_API_KEY =
 "c2e3fcd3251f6d46da391b73e5113cda";
@@ -1087,49 +1090,77 @@ if(!snapshot.exists()) return;
 const data =
 snapshot.data();
 
-if(
-!isProvider &&
-data.workflowStatus==="waiting_rating"
-){
-
-ratingContainer.style.display="block";
-
-}else{
-
-ratingContainer.style.display="none";
-
-}
+const waitingRating =
+data.workflowStatus==="waiting_rating";
 
 const completed =
 data.workflowStatus==="completed";
 
-document.getElementById(
-"messageInput"
-).disabled =
-completed;
+if(
+ratingContainer
+){
 
-document.getElementById(
-"sendBtn"
-).style.display =
-completed
-? "none"
-: "";
+ratingContainer.style.display=
 
-document.getElementById(
-"attachmentBtn"
-).style.display =
-completed
-? "none"
-: "";
+(
+!isProvider &&
+waitingRating &&
+!data.ratingDone
+)
 
-if(completed){
+?
 
-document.getElementById(
-"messageInput"
-).placeholder=
-"Transaksi selesai. Percakapan telah ditutup.";
+"block"
+
+:
+
+"none";
 
 }
+
+const input =
+document.getElementById(
+"messageInput"
+);
+
+const sendBtn =
+document.getElementById(
+"sendBtn"
+);
+
+const attachmentBtn =
+document.getElementById(
+"attachmentBtn"
+);
+
+input.disabled=
+completed;
+
+sendBtn.style.display=
+completed
+?
+"none"
+:
+"";
+
+attachmentBtn.style.display=
+completed
+?
+"none"
+:
+"";
+
+input.placeholder=
+
+completed
+
+?
+
+"Transaksi selesai. Percakapan telah ditutup."
+
+:
+
+"Tulis pesan...";
 
 });
 
@@ -1139,48 +1170,42 @@ document.body.classList.remove(
 "page-loading"
 );
 
-document.body.classList.add(
-"page-ready"
-);
-
-const ratingContainer =
+ratingContainer =
 document.getElementById(
 "ratingContainer"
 );
 
-const ratingReview =
+ratingReview =
 document.getElementById(
 "ratingReview"
 );
 
-const ratingStars =
-document.querySelectorAll(
+ratingStars =
+[
+...document.querySelectorAll(
 "#ratingStars span"
-);
+)
+];
 
 ratingStars.forEach(star=>{
 
-star.addEventListener(
-"click",
-()=>{
+star.onclick=()=>{
 
-selectedRating =
+selectedRating=
 Number(
 star.dataset.rate
 );
 
-ratingStars.forEach(s=>{
+ratingStars.forEach(item=>{
 
-s.classList.toggle(
+item.classList.toggle(
 "active",
-Number(
-s.dataset.rate
-)<=selectedRating
+Number(item.dataset.rate)<=selectedRating
 );
 
 });
 
-});
+};
 
 });
 
