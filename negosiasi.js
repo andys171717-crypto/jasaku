@@ -179,6 +179,19 @@ workflowStatus ===
 "payment_confirmed"
 ){
 
+if(
+workflowStatus===
+"waiting_rating"
+){
+
+buttonText=
+"Menunggu Rating";
+
+buttonClass=
+"status-btn waiting-btn";
+
+}
+
 buttonText =
 "Selesaikan";
 
@@ -1707,16 +1720,12 @@ db,
 async(transaction)=>{
 
 const providerSnap=
-await transaction.get(
-providerRef
-);
+await transaction.get(providerRef);
 
 const providerData=
 providerSnap.exists()
-?
-providerSnap.data()
-:
-{};
+?providerSnap.data()
+:{};
 
 const oldAverage=
 providerData.ratingAverage||0;
@@ -1730,75 +1739,43 @@ oldCount+1;
 const newAverage=
 (
 (oldAverage*oldCount)+rating
-)
-/newCount;
+)/newCount;
 
 transaction.set(
 reviewRef,
 {
-
 requestId,
-
-customerId:
-currentUser.uid,
-
+customerId:currentUser.uid,
 rating,
-
 review,
-
-createdAt:
-serverTimestamp()
-
+createdAt:serverTimestamp()
 }
-
 );
 
 transaction.update(
 providerRef,
 {
-
-ratingAverage:
-Number(
-newAverage.toFixed(1)
-),
-
-ratingCount:
-newCount
-
+ratingAverage:Number(newAverage.toFixed(1)),
+ratingCount:newCount
 }
-
 );
 
 transaction.update(
-
-doc(
-db,
-"requests",
-requestId
-),
-
+doc(db,"requests",requestId),
 {
-
 rating,
-
 review,
-
 ratingDone:true,
-
-workflowStatus:
-"completed",
-
-status:
-"Selesai",
-
-reviewedAt:
-serverTimestamp()
-
+workflowStatus:"completed",
+status:"Selesai",
+completedAt:serverTimestamp(),
+reviewedAt:serverTimestamp()
 }
-
 );
 
 });
+
+await loadRequest();
 
 return;
 
