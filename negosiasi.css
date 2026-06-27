@@ -123,11 +123,9 @@ flex-direction:column;
 
 gap:8px;
 
-padding:12px 15px;
+padding:12px 15px 10px;
 
 background:#f5f7fb;
-
-padding-bottom:170px;
 
 box-sizing:border-box;
 
@@ -1094,7 +1092,9 @@ background:#1d4ed8;
 
 display:none;
 
-padding:0 15px 20px;
+padding:0 15px 140px;
+
+margin-top:8px;
 
 animation:fadeRating .25s ease;
 
