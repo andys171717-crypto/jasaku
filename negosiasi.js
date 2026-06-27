@@ -1649,25 +1649,100 @@ e.target.closest(".rating-card");
 
 const rating=
 Number(
-
 card
-.querySelector(
-".rating-stars"
-)
+.querySelector(".rating-stars")
 .dataset.rating
-
 )||0;
 
 const review=
-
 card
-.querySelector(
-".rating-review"
-)
+.querySelector(".rating-review")
 .value
 .trim();
 
-await updateDoc(
+const providerRef=
+doc(
+db,
+"users",
+requestData.providerId
+);
+
+const reviewRef=
+doc(
+collection(
+providerRef,
+"reviews"
+)
+);
+
+await runTransaction(
+db,
+async(transaction)=>{
+
+const providerSnap=
+await transaction.get(
+providerRef
+);
+
+const providerData=
+providerSnap.exists()
+?
+providerSnap.data()
+:
+{};
+
+const oldAverage=
+providerData.ratingAverage||0;
+
+const oldCount=
+providerData.ratingCount||0;
+
+const newCount=
+oldCount+1;
+
+const newAverage=
+(
+(oldAverage*oldCount)+rating
+)
+/newCount;
+
+transaction.set(
+reviewRef,
+{
+
+requestId,
+
+customerId:
+currentUser.uid,
+
+rating,
+
+review,
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+transaction.update(
+providerRef,
+{
+
+ratingAverage:
+Number(
+newAverage.toFixed(1)
+),
+
+ratingCount:
+newCount
+
+}
+
+);
+
+transaction.update(
 
 doc(
 db,
@@ -1681,18 +1756,22 @@ rating,
 
 review,
 
-reviewedAt:
-serverTimestamp(),
+ratingDone:true,
 
 workflowStatus:
 "completed",
 
 status:
-"Selesai"
+"Selesai",
+
+reviewedAt:
+serverTimestamp()
 
 }
 
 );
+
+});
 
 return;
 
