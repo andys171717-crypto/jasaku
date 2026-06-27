@@ -408,6 +408,40 @@ snapshot.data();
 
 loadRequest();
 
+const isCompleted =
+requestData.workflowStatus==="completed";
+
+document.getElementById(
+"messageInput"
+).disabled =
+isCompleted;
+
+document.getElementById(
+"sendBtn"
+).style.display =
+isCompleted
+? "none"
+: "";
+
+document.getElementById(
+"attachmentBtn"
+).style.display =
+isCompleted
+? "none"
+: "";
+
+if(isCompleted){
+
+const input =
+document.getElementById(
+"messageInput"
+);
+
+input.placeholder =
+"Transaksi selesai. Percakapan telah ditutup.";
+
+}
+
 }
 );
 
@@ -788,41 +822,9 @@ return;
 }
 
 if(
-msg.type==="rating_request" &&
-requestData.workflowStatus==="waiting_rating"
+requestData.workflowStatus==="waiting_rating" &&
+!isProvider
 ){
-
-if(isProvider){
-
-chat.innerHTML+=`
-
-<div class="system-message">
-
-<div class="system-card rating-card">
-
-<div class="rating-title">
-
-⭐ Menunggu Rating Customer
-
-</div>
-
-<div class="rating-desc">
-
-Customer dapat memberikan
-<b>Rating Mitra JasKit</b>
-setelah transaksi selesai.
-
-Ulasan bersifat opsional.
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}else{
 
 chat.innerHTML+=`
 
@@ -895,8 +897,6 @@ Kirim Rating
 </div>
 
 `;
-
-}
 
 return;
 
@@ -989,6 +989,16 @@ behavior: "smooth"
 
 async function sendMessage(){
 
+if(requestData?.workflowStatus==="completed"){
+
+alert(
+"Transaksi telah selesai. Percakapan sudah ditutup."
+);
+
+return;
+
+}  
+
 if(selectedImage){
 
 await sendImage(
@@ -1076,6 +1086,16 @@ return result.data.url;
 
 async function sendImage(file){
 
+if(requestData?.workflowStatus==="completed"){
+
+alert(
+"Transaksi telah selesai. Percakapan sudah ditutup."
+);
+
+return;
+
+}  
+
 const imageUrl =
 await uploadImage(file);
 
@@ -1105,6 +1125,16 @@ serverTimestamp()
 }
 
 async function sendLocation(){
+
+if(requestData?.workflowStatus==="completed"){
+
+alert(
+"Transaksi telah selesai. Percakapan sudah ditutup."
+);
+
+return;
+
+}  
 
 if(!navigator.geolocation){
 
@@ -1605,29 +1635,6 @@ workflowStatus:"completed",
 status:"Selesai",
 
 completedAt:
-serverTimestamp()
-
-}
-
-);
-
-await addDoc(
-
-collection(
-db,
-"requests",
-requestId,
-"messages"
-),
-
-{
-
-type:"system",
-
-text:
-"⭐ Customer melewati pemberian rating.",
-
-createdAt:
 serverTimestamp()
 
 }
