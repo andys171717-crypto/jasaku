@@ -1836,12 +1836,12 @@ requestId
 {
 
 workflowStatus:
-"completed",
+"waiting_rating",
 
 status:
-"Selesai",
+"Menunggu Rating",
 
-completedAt:
+waitingRatingAt:
 serverTimestamp()
 
 }
@@ -1862,7 +1862,7 @@ requestId,
 type:"system",
 
 text:
-"🎉 Pesanan telah diselesaikan oleh Mitra.",
+"✅ Pekerjaan telah selesai. Customer dapat memberikan rating atau melewatinya.",
 
 createdAt:
 serverTimestamp()
