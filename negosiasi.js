@@ -7,15 +7,13 @@ getFirestore,
 doc,
 getDoc,
 getDocs,
-setDoc,
 updateDoc,
 collection,
 addDoc,
 query,
 orderBy,
 onSnapshot,
-serverTimestamp,
-runTransaction
+serverTimestamp
 
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
@@ -178,19 +176,6 @@ if(
 workflowStatus ===
 "payment_confirmed"
 ){
-
-if(
-workflowStatus===
-"waiting_rating"
-){
-
-buttonText=
-"Menunggu Rating";
-
-buttonClass=
-"status-btn waiting-btn";
-
-}
 
 buttonText =
 "Selesaikan";
@@ -420,40 +405,6 @@ requestData =
 snapshot.data();
 
 loadRequest();
-
-const isCompleted =
-requestData.workflowStatus==="completed";
-
-document.getElementById(
-"messageInput"
-).disabled =
-isCompleted;
-
-document.getElementById(
-"sendBtn"
-).style.display =
-isCompleted
-? "none"
-: "";
-
-document.getElementById(
-"attachmentBtn"
-).style.display =
-isCompleted
-? "none"
-: "";
-
-if(isCompleted){
-
-const input =
-document.getElementById(
-"messageInput"
-);
-
-input.placeholder =
-"Transaksi selesai. Percakapan telah ditutup.";
-
-}
 
 }
 );
@@ -834,87 +785,6 @@ return;
 
 }
 
-if(
-requestData.workflowStatus==="waiting_rating" &&
-!isProvider
-){
-
-chat.innerHTML+=`
-
-<div class="system-message">
-
-<div class="system-card rating-card">
-
-<div class="rating-title">
-
-⭐ Beri Rating Mitra JasKit
-
-</div>
-
-<div class="rating-desc">
-
-Bagaimana pengalaman Anda
-menggunakan jasa Mitra ini?
-
-Rating akan tampil pada
-profil Mitra JasKit.
-
-Ulasan bersifat opsional.
-
-</div>
-
-<div
-class="rating-stars"
-data-rating="0">
-
-<span data-rate="1">☆</span>
-
-<span data-rate="2">☆</span>
-
-<span data-rate="3">☆</span>
-
-<span data-rate="4">☆</span>
-
-<span data-rate="5">☆</span>
-
-</div>
-
-<textarea
-
-class="rating-review"
-
-placeholder="Tulis ulasan (Opsional)">
-
-</textarea>
-
-<div class="rating-actions">
-
-<button
-class="rating-skip-btn">
-
-Lewati
-
-</button>
-
-<button
-class="rating-send-btn">
-
-Kirim Rating
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
 if(msg.type === "system"){
 
 chat.innerHTML += `
@@ -1001,16 +871,6 @@ behavior: "smooth"
 }
 
 async function sendMessage(){
-
-if(requestData?.workflowStatus==="completed"){
-
-alert(
-"Transaksi telah selesai. Percakapan sudah ditutup."
-);
-
-return;
-
-}  
 
 if(selectedImage){
 
@@ -1099,16 +959,6 @@ return result.data.url;
 
 async function sendImage(file){
 
-if(requestData?.workflowStatus==="completed"){
-
-alert(
-"Transaksi telah selesai. Percakapan sudah ditutup."
-);
-
-return;
-
-}  
-
 const imageUrl =
 await uploadImage(file);
 
@@ -1138,16 +988,6 @@ serverTimestamp()
 }
 
 async function sendLocation(){
-
-if(requestData?.workflowStatus==="completed"){
-
-alert(
-"Transaksi telah selesai. Percakapan sudah ditutup."
-);
-
-return;
-
-}  
 
 if(!navigator.geolocation){
 
@@ -1415,16 +1255,6 @@ document
 "click",
 ()=>{
 
-if(requestData?.workflowStatus==="completed"){
-
-alert(
-"Transaksi telah selesai. Percakapan sudah ditutup."
-);
-
-return;
-
-}
-
 document
 .getElementById(
 "attachmentMenu"
@@ -1446,16 +1276,6 @@ document
 .addEventListener(
 "click",
 ()=>{
-
-if(requestData?.workflowStatus==="completed"){
-
-alert(
-"Transaksi telah selesai. Percakapan sudah ditutup."
-);
-
-return;
-
-}
 
 document
 .getElementById(
@@ -1602,184 +1422,6 @@ document
 .addEventListener(
 "click",
 async (e)=>{
-
-/* ===========================
-   RATING MITRA
-=========================== */
-
-if(
-e.target.closest(".rating-stars span")
-){
-
-const star=
-e.target.closest(".rating-stars span");
-
-const wrapper=
-star.parentElement;
-
-const value=
-Number(star.dataset.rate);
-
-wrapper.dataset.rating=value;
-
-wrapper
-.querySelectorAll("span")
-.forEach(item=>{
-
-const rate=
-Number(item.dataset.rate);
-
-item.textContent=
-rate<=value
-?
-"★"
-:
-"☆";
-
-item.classList.toggle(
-"active",
-rate<=value
-);
-
-});
-
-return;
-
-}
-
-if(
-e.target.classList.contains(
-"rating-skip-btn"
-)
-){
-
-await updateDoc(
-
-doc(
-db,
-"requests",
-requestId
-),
-
-{
-
-workflowStatus:"completed",
-
-status:"Selesai",
-
-completedAt:
-serverTimestamp()
-
-}
-
-);
-
-return;
-
-}
-
-if(
-e.target.classList.contains(
-"rating-send-btn"
-)
-){
-
-const card=
-e.target.closest(".rating-card");
-
-const rating=
-Number(
-card
-.querySelector(".rating-stars")
-.dataset.rating
-)||0;
-
-const review=
-card
-.querySelector(".rating-review")
-.value
-.trim();
-
-const providerRef=
-doc(
-db,
-"users",
-requestData.providerId
-);
-
-const reviewRef=
-doc(
-collection(
-providerRef,
-"reviews"
-)
-);
-
-await runTransaction(
-db,
-async(transaction)=>{
-
-const providerSnap=
-await transaction.get(providerRef);
-
-const providerData=
-providerSnap.exists()
-?providerSnap.data()
-:{};
-
-const oldAverage=
-providerData.ratingAverage||0;
-
-const oldCount=
-providerData.ratingCount||0;
-
-const newCount=
-oldCount+1;
-
-const newAverage=
-(
-(oldAverage*oldCount)+rating
-)/newCount;
-
-transaction.set(
-reviewRef,
-{
-requestId,
-customerId:currentUser.uid,
-rating,
-review,
-createdAt:serverTimestamp()
-}
-);
-
-transaction.update(
-providerRef,
-{
-ratingAverage:Number(newAverage.toFixed(1)),
-ratingCount:newCount
-}
-);
-
-transaction.update(
-doc(db,"requests",requestId),
-{
-rating,
-review,
-ratingDone:true,
-workflowStatus:"completed",
-status:"Selesai",
-completedAt:serverTimestamp(),
-reviewedAt:serverTimestamp()
-}
-);
-
-});
-
-await loadRequest();
-
-return;
-
-}
 
 if(
 e.target.id==="goPaymentBtn"
@@ -1981,11 +1623,36 @@ requestId
 
 {
 
-workflowStatus:"waiting_rating",
+workflowStatus:
+"completed",
 
-status:"Menunggu Rating",
+status:
+"Selesai",
 
-waitingRatingAt:
+completedAt:
+serverTimestamp()
+
+}
+
+);
+
+await addDoc(
+
+collection(
+db,
+"requests",
+requestId,
+"messages"
+),
+
+{
+
+type:"system",
+
+text:
+"🎉 Pesanan telah diselesaikan oleh Mitra.",
+
+createdAt:
 serverTimestamp()
 
 }
