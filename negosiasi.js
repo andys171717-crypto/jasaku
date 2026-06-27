@@ -900,46 +900,6 @@ return;
 
 }
 
-if(msg.type==="rating_result"){
-
-if(isProvider){
-
-chat.innerHTML+=`
-
-<div class="system-message">
-
-<div class="system-card">
-
-⭐ Customer memberikan rating
-
-<br><br>
-
-<b>${msg.rating}/5</b>
-
-${
-msg.review
-?
-
-`<br><br>${msg.review}`
-
-:
-
-""
-
-}
-
-</div>
-
-</div>
-
-`;
-
-}
-
-return;
-
-}
-
 if(msg.type === "system"){
 
 chat.innerHTML += `
@@ -1727,30 +1687,6 @@ workflowStatus:
 
 status:
 "Selesai"
-
-}
-
-);
-
-await addDoc(
-
-collection(
-db,
-"requests",
-requestId,
-"messages"
-),
-
-{
-
-type:"rating_result",
-
-rating,
-
-review,
-
-createdAt:
-serverTimestamp()
 
 }
 
