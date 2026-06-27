@@ -1085,3 +1085,171 @@ font-weight:700;
 background:#1d4ed8;
 
 }
+
+/* ===========================
+   RATING MITRA JASKIT
+=========================== */
+
+.rating-container{
+
+padding:0 15px 15px;
+
+}
+
+.rating-card{
+
+background:#fff;
+
+border-radius:18px;
+
+padding:20px;
+
+box-shadow:
+0 6px 18px rgba(0,0,0,.08);
+
+border:1px solid #e5e7eb;
+
+}
+
+.rating-card h3{
+
+margin:0 0 12px;
+
+text-align:center;
+
+font-size:22px;
+
+color:#111827;
+
+}
+
+.rating-card p{
+
+margin:0 0 20px;
+
+text-align:center;
+
+font-size:14px;
+
+line-height:1.8;
+
+color:#6b7280;
+
+}
+
+.rating-stars{
+
+display:flex;
+
+justify-content:center;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+.rating-stars span{
+
+font-size:42px;
+
+cursor:pointer;
+
+color:#d1d5db;
+
+transition:.2s;
+
+user-select:none;
+
+}
+
+.rating-stars span.active{
+
+color:#f59e0b;
+
+transform:scale(1.08);
+
+}
+
+#ratingReview{
+
+width:100%;
+
+min-height:110px;
+
+padding:14px;
+
+border-radius:14px;
+
+border:1px solid #d1d5db;
+
+font-size:15px;
+
+box-sizing:border-box;
+
+resize:vertical;
+
+margin-bottom:18px;
+
+}
+
+#ratingReview:focus{
+
+outline:none;
+
+border-color:#2563eb;
+
+box-shadow:
+0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+.rating-actions{
+
+display:flex;
+
+gap:12px;
+
+}
+
+.rating-actions button{
+
+flex:1;
+
+height:48px;
+
+border:none;
+
+border-radius:14px;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+#skipRatingBtn{
+
+background:#e5e7eb;
+
+color:#111827;
+
+}
+
+#sendRatingBtn{
+
+background:#16a34a;
+
+color:#fff;
+
+}
+
+#sendRatingBtn:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
+
+}
