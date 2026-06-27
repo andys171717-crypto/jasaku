@@ -1086,13 +1086,17 @@ background:#1d4ed8;
 
 }
 
-/* ===========================
+/* =====================================
    RATING MITRA JASKIT
-=========================== */
+===================================== */
 
 .rating-container{
 
-padding:0 15px 15px;
+display:none;
+
+padding:0 15px 20px;
+
+animation:fadeRating .25s ease;
 
 }
 
@@ -1100,22 +1104,28 @@ padding:0 15px 15px;
 
 background:#fff;
 
-border-radius:18px;
+border-radius:20px;
 
 padding:20px;
 
-box-shadow:
-0 6px 18px rgba(0,0,0,.08);
-
 border:1px solid #e5e7eb;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.08);
 
 }
 
-.rating-card h3{
-
-margin:0 0 12px;
+.rating-header{
 
 text-align:center;
+
+margin-bottom:18px;
+
+}
+
+.rating-header h3{
+
+margin:0;
 
 font-size:22px;
 
@@ -1123,15 +1133,13 @@ color:#111827;
 
 }
 
-.rating-card p{
+.rating-header p{
 
-margin:0 0 20px;
-
-text-align:center;
+margin:10px 0 0;
 
 font-size:14px;
 
-line-height:1.8;
+line-height:1.7;
 
 color:#6b7280;
 
@@ -1143,7 +1151,7 @@ display:flex;
 
 justify-content:center;
 
-gap:10px;
+gap:12px;
 
 margin-bottom:20px;
 
@@ -1151,19 +1159,33 @@ margin-bottom:20px;
 
 .rating-stars span{
 
-font-size:42px;
+width:48px;
+
+height:48px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+background:#f3f4f6;
 
 cursor:pointer;
 
-color:#d1d5db;
-
 transition:.2s;
 
-user-select:none;
+font-size:24px;
+
+color:#cbd5e1;
 
 }
 
 .rating-stars span.active{
+
+background:#fef3c7;
 
 color:#f59e0b;
 
@@ -1175,17 +1197,17 @@ transform:scale(1.08);
 
 width:100%;
 
-min-height:110px;
+min-height:100px;
 
 padding:14px;
 
-border-radius:14px;
-
 border:1px solid #d1d5db;
 
-font-size:15px;
+border-radius:14px;
 
 box-sizing:border-box;
+
+font-size:14px;
 
 resize:vertical;
 
@@ -1200,7 +1222,7 @@ outline:none;
 border-color:#2563eb;
 
 box-shadow:
-0 0 0 3px rgba(37,99,235,.15);
+0 0 0 3px rgba(37,99,235,.12);
 
 }
 
@@ -1251,5 +1273,25 @@ color:#fff;
 opacity:.6;
 
 cursor:not-allowed;
+
+}
+
+@keyframes fadeRating{
+
+from{
+
+opacity:0;
+
+transform:translateY(12px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
 
 }
