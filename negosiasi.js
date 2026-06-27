@@ -7,13 +7,15 @@ getFirestore,
 doc,
 getDoc,
 getDocs,
+setDoc,
 updateDoc,
 collection,
 addDoc,
 query,
 orderBy,
 onSnapshot,
-serverTimestamp
+serverTimestamp,
+runTransaction
 
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
