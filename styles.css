@@ -1550,7 +1550,7 @@ display:flex;
 
 align-items:center;
 
-gap:14px;
+gap:10px;
 
 }
 
@@ -1564,15 +1564,15 @@ flex-direction:column;
 
 .brand-name{
 
-font-size:30px;
+font-size:26px;
 
 font-weight:800;
 
-line-height:1;
+line-height:1.15;
 
 margin:0;
 
-letter-spacing:-0.5px;
+letter-spacing:-0.4px;
 
 }
 
@@ -1606,9 +1606,9 @@ text-transform:uppercase;
 
 .header-logo{
 
-width:58px;
+width:72px;
 
-height:58px;
+height:72px;
 
 object-fit:contain;
 
