@@ -31,10 +31,6 @@ class="header-logo">
 <span class="brand-blue">Jas</span><span class="brand-dark">Kit</span>
 </h2>
 
-<p class="brand-tagline">
-Marketplace Semua Jasa
-</p>
-
 </div>
 
 </div>
@@ -1268,11 +1264,8 @@ if(user){
 window.isLoggedIn = true;
 
 headerUser.innerText =
-"Halo, " +
-(
 user.displayName ||
-user.email
-);
+user.email;
 
 try{
 
