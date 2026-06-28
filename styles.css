@@ -1446,9 +1446,35 @@ margin-top:14px;
 }
 
 .header-top{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:flex-start;
+
+}
+
+.header-left{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.header-right{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-end;
+
+gap:8px;
+
 }
 
 .location{
@@ -1545,9 +1571,7 @@ display:flex;
 
 align-items:center;
 
-gap:2px;
-
-margin-bottom:-2px;
+gap:0;
 
 }
 
@@ -1603,10 +1627,12 @@ text-transform:uppercase;
 
 .header-logo{
 
-width:56px;
+width:58px;
 
-height:56px;
+height:58px;
 
-margin-right:-2px;
+margin-right:-8px;
+
+display:block;
 
 }
