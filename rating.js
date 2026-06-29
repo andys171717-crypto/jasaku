@@ -8,6 +8,12 @@ getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
 const firebaseConfig = {
 
 apiKey:"AIzaSyCnk56ZY63q2h1ewEdiivzB0rrSfJOJtYo",
@@ -30,6 +36,9 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
+const auth =
+getAuth(app);
+
 const params =
 new URLSearchParams(
 window.location.search
@@ -38,7 +47,25 @@ window.location.search
 const requestId =
 params.get("id");
 
-loadRequest();
+onAuthStateChanged(
+auth,
+async(user)=>{
+
+if(!user){
+
+document.getElementById(
+"providerCard"
+).innerHTML=
+
+"<h3>Silakan login terlebih dahulu.</h3>";
+
+return;
+
+}
+
+await loadRequest();
+
+});
 
 async function loadRequest(){
 
