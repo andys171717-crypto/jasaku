@@ -42,46 +42,53 @@ loadRequest();
 
 async function loadRequest(){
 
-if(!requestId){
+    try{
 
-document.getElementById(
-"providerCard"
-).innerHTML=
+        if(!requestId){
 
-"<h3>Data transaksi tidak ditemukan.</h3>";
+            document.getElementById("providerCard").innerHTML=
+            "<h3>Request ID tidak ditemukan.</h3>";
 
-return;
+            return;
 
-}
+        }
 
-const snap=
+        console.log("Request ID :",requestId);
 
-await getDoc(
+        const snap = await getDoc(
+            doc(
+                db,
+                "requests",
+                requestId
+            )
+        );
 
-doc(
-db,
-"requests",
-requestId
-)
+        console.log("Document Exists :",snap.exists());
 
-);
+        if(!snap.exists()){
 
-if(!snap.exists()){
+            document.getElementById("providerCard").innerHTML=
+            "<h3>Transaksi tidak ditemukan.</h3>";
 
-document.getElementById(
-"providerCard"
-).innerHTML=
+            return;
 
-"<h3>Transaksi tidak ditemukan.</h3>";
+        }
 
-return;
+        const data = snap.data();
 
-}
+        console.log("Request Data :",data);
 
-const data=
-snap.data();
+        renderProvider(data);
 
-renderProvider(data);
+    }catch(err){
+
+        console.error(err);
+
+        document.getElementById("providerCard").innerHTML=
+
+        `<h3>${err.message}</h3>`;
+
+    }
 
 }
 
