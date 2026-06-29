@@ -5,8 +5,7 @@ import {
 getFirestore,
 doc,
 getDoc,
-collection,
-addDoc,
+setDoc,
 serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
@@ -493,15 +492,28 @@ createdAt:serverTimestamp()
 
 try{
 
-await addDoc(
-
-collection(
+const ratingRef = doc(
 db,
-"ratings"
-),
+"ratings",
+requestId
+);
 
+const ratingSnap =
+await getDoc(ratingRef);
+
+if(ratingSnap.exists()){
+
+alert(
+"Transaksi ini sudah pernah diberi penilaian."
+);
+
+return;
+
+}
+
+await setDoc(
+ratingRef,
 ratingData
-
 );
 
 showSuccess();
