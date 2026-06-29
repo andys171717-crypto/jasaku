@@ -142,9 +142,15 @@ ${data.keluhan}
 <button
 class="btn-chat"
 data-id="${doc.id}"
-data-status="${data.workflowStatus}">
+data-status="${data.workflowStatus}"
+data-rated="${data.rated===true}"
+data-skipped="${data.ratingSkipped===true}">
 
-${getActionText(data.workflowStatus)}
+${getActionText(
+data.workflowStatus,
+data.rated,
+data.ratingSkipped
+)}
 
 </button>
 
@@ -166,9 +172,17 @@ btn.dataset.id;
 const status =
 btn.dataset.status;
 
+const rated =
+btn.dataset.rated==="true";
+
+const skipped =
+btn.dataset.skipped==="true";
+
 openActivity(
 id,
-status
+status,
+rated,
+skipped
 );
 
 });
