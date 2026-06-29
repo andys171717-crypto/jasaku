@@ -46,10 +46,6 @@ let isProvider = false;
 let firstLoad = true;
 let lastMessageCount = 0;
 let selectedImage = null;
-let selectedRating = 0;
-let ratingContainer = null;
-let ratingReview = null;
-let ratingStars = [];
 
 const IMGBB_API_KEY =
 "c2e3fcd3251f6d46da391b73e5113cda";
@@ -134,7 +130,8 @@ const workflowStatus =
 requestData?.workflowStatus ||
 "negotiation";
 
-let buttonText="Selesai";
+let buttonText =
+"Mulai";
 
 let buttonClass =
 "status-btn";
@@ -858,12 +855,12 @@ ${formatTime(msg.createdAt)}
 
 setTimeout(()=>{
 
-chat.lastElementChild?.scrollIntoView({
+chat.scrollTop =
+chat.scrollHeight;
 
-behavior:"smooth",
-
-block:"end"
-
+window.scrollTo({
+top: document.body.scrollHeight,
+behavior: "smooth"
 });
 
 },150);
@@ -1074,152 +1071,15 @@ await loadRequest();
 
 initRealtimeRequest();
 
-onSnapshot(
-
-doc(
-db,
-"requests",
-requestId
-),
-
-(snapshot)=>{
-
-if(!snapshot.exists()) return;
-
-const data =
-snapshot.data();
-
-const waitingRating =
-data.workflowStatus==="waiting_rating";
-
-const completed =
-data.workflowStatus==="completed";
-
-/* Card Rating hanya untuk Customer */
-
-if(ratingContainer){
-
-const showRating =
-!isProvider &&
-waitingRating &&
-!data.ratingDone;
-
-ratingContainer.style.display =
-showRating
-?
-"block"
-:
-"none";
-
-if(showRating){
-
-setTimeout(()=>{
-
-ratingContainer.scrollIntoView({
-
-behavior:"smooth",
-
-block:"start"
-
-});
-
-},200);
-
-}
-
-}
-
-/* Chat langsung dikunci setelah Provider klik Selesai */
-
-const lockChat =
-waitingRating ||
-completed;
-
-const input =
-document.getElementById(
-"messageInput"
-);
-
-const sendBtn =
-document.getElementById(
-"sendBtn"
-);
-
-const attachmentBtn =
-document.getElementById(
-"attachmentBtn"
-);
-
-input.disabled =
-lockChat;
-
-sendBtn.style.display =
-lockChat
-?
-"none"
-:
-"";
-
-attachmentBtn.style.display =
-lockChat
-?
-"none"
-:
-"";
-
-input.placeholder =
-lockChat
-?
-"Transaksi selesai. Percakapan telah ditutup."
-:
-"Tulis pesan...";
-
-});
-
 initRealtimeChat();
 
 document.body.classList.remove(
 "page-loading"
 );
 
-ratingContainer =
-document.getElementById(
-"ratingContainer"
+document.body.classList.add(
+"page-ready"
 );
-
-ratingReview =
-document.getElementById(
-"ratingReview"
-);
-
-ratingStars =
-[
-...document.querySelectorAll(
-"#ratingStars span"
-)
-];
-
-ratingStars.forEach(star=>{
-
-star.onclick=()=>{
-
-selectedRating=
-Number(
-star.dataset.rate
-);
-
-ratingStars.forEach(item=>{
-
-item.classList.toggle(
-"active",
-Number(item.dataset.rate)<=selectedRating
-);
-
-});
-
-};
-
-});
 
 const acceptBtn =
 document.getElementById(
@@ -1563,115 +1423,6 @@ document
 "click",
 async (e)=>{
 
-/* ===========================
-   RATING MITRA
-=========================== */
-
-if(
-e.target.id==="skipRatingBtn"
-){
-
-await updateDoc(
-
-doc(
-db,
-"requests",
-requestId
-),
-
-{
-
-workflowStatus:"completed",
-
-status:"Selesai",
-
-ratingDone:true,
-
-completedAt:
-serverTimestamp()
-
-}
-
-);
-
-document.getElementById(
-"ratingContainer"
-).style.display="none";
-
-return;
-
-}
-
-if(
-e.target.id==="sendRatingBtn"
-){
-
-if(selectedRating===0){
-
-alert(
-"Pilih jumlah bintang terlebih dahulu."
-);
-
-return;
-
-}
-
-e.target.disabled=true;
-
-await updateDoc(
-
-doc(
-db,
-"requests",
-requestId
-),
-
-{
-
-workflowStatus:"completed",
-
-status:"Selesai",
-
-rating:selectedRating,
-
-review:
-ratingReview.value.trim(),
-
-ratingDone:true,
-
-completedAt:
-serverTimestamp()
-
-}
-
-);
-
-document.getElementById(
-"ratingContainer"
-).style.display="none";
-
-e.target.disabled=false;
-
-selectedRating=0;
-
-ratingReview.value="";
-
-document
-.querySelectorAll(
-"#ratingStars span"
-)
-.forEach(star=>{
-
-star.classList.remove(
-"active"
-);
-
-});
-
-return;
-
-}
-
 if(
 e.target.id==="goPaymentBtn"
 ){
@@ -1873,12 +1624,12 @@ requestId
 {
 
 workflowStatus:
-"waiting_rating",
+"completed",
 
 status:
 "Selesai",
 
-waitingRatingAt:
+completedAt:
 serverTimestamp()
 
 }
@@ -1899,7 +1650,7 @@ requestId,
 type:"system",
 
 text:
-"✅ Pekerjaan telah selesai. Customer dapat memberikan rating atau melewatinya.",
+"🎉 Pesanan telah diselesaikan oleh Mitra.",
 
 createdAt:
 serverTimestamp()
