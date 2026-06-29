@@ -516,6 +516,14 @@ ratingRef,
 ratingData
 );
 
+await setDoc(
+doc(db,"requests",requestId),
+{
+...requestData,
+rated:true
+}
+);
+
 showSuccess();
 
 }catch(err){
