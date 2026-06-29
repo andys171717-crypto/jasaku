@@ -264,3 +264,167 @@ selectedTags.push(value);
 );
 
 }
+
+function updateStars(){
+
+document
+.querySelectorAll(
+"#ratingStars i"
+)
+.forEach(
+(star)=>{
+
+const value=
+Number(
+star.dataset.value
+);
+
+if(
+value<=selectedRating
+){
+
+star.classList.add(
+"active"
+);
+
+}else{
+
+star.classList.remove(
+"active"
+);
+
+}
+
+}
+);
+
+}
+
+async function submitRating(){
+
+if(selectedRating===0){
+
+alert(
+"Pilih jumlah bintang terlebih dahulu."
+);
+
+return;
+
+}
+
+const review=
+
+document
+.getElementById(
+"ratingReview"
+)
+.value
+.trim();
+
+const ratingData={
+
+rating:selectedRating,
+
+review,
+
+tags:selectedTags,
+
+requestId,
+
+providerId:
+requestData.providerId,
+
+customerId:
+currentUser.uid,
+
+createdAt:
+new Date()
+
+};
+
+try{
+
+await addDoc(
+
+collection(
+db,
+"ratings"
+),
+
+ratingData
+
+);
+
+showSuccess();
+
+}
+catch(err){
+
+console.error(err);
+
+alert(
+"Gagal mengirim rating."
+);
+
+}
+
+}
+
+function skipRating(){
+
+showSuccess();
+
+}
+
+function showSuccess(){
+
+const container=
+
+document.getElementById(
+"ratingContainer"
+);
+
+container.innerHTML=`
+
+<div
+class="rating-success">
+
+🎉
+
+Terima kasih.
+
+Penilaian berhasil disimpan.
+
+</div>
+
+`;
+
+}
+
+document
+
+.addEventListener(
+
+"click",
+
+(e)=>{
+
+if(
+e.target.id==="submitRating"
+){
+
+submitRating();
+
+}
+
+if(
+e.target.id==="skipRating"
+){
+
+skipRating();
+
+}
+
+}
+
+);
