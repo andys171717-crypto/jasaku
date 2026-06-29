@@ -1,3 +1,12 @@
+import {
+collection,
+addDoc,
+updateDoc,
+doc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
 /* ======================================
    JASKIT RATING MODULE
 ====================================== */
@@ -379,15 +388,13 @@ showSuccess();
 function showSuccess(){
 
 const container=
-
 document.getElementById(
 "ratingContainer"
 );
 
 container.innerHTML=`
 
-<div
-class="rating-success">
+<div class="rating-success">
 
 🎉
 
@@ -399,11 +406,15 @@ Penilaian berhasil disimpan.
 
 `;
 
+setTimeout(()=>{
+
+hideRating();
+
+},1200);
+
 }
 
-document
-
-.addEventListener(
+document.addEventListener(
 
 "click",
 
@@ -428,3 +439,33 @@ skipRating();
 }
 
 );
+
+export function showRating(data){
+
+requestData=data;
+
+const container=document.getElementById("ratingContainer");
+
+if(!container) return;
+
+container.style.display="block";
+
+window.scrollTo({
+
+top:document.body.scrollHeight,
+
+behavior:"smooth"
+
+});
+
+}
+
+export function hideRating(){
+
+const container=document.getElementById("ratingContainer");
+
+if(!container) return;
+
+container.style.display="none";
+
+}
