@@ -200,6 +200,8 @@ window.location.href=
 
 }
 
+window.openActivity = openActivity;
+
 onAuthStateChanged(
 auth,
 async(user)=>{
@@ -219,3 +221,4 @@ user.uid
 
 }
 );
+
