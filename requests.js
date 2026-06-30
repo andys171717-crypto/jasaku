@@ -142,9 +142,15 @@ ${data.keluhan}
 <button
 class="btn-chat"
 data-id="${doc.id}"
-data-status="${data.workflowStatus}">
+data-status="${data.workflowStatus}"
+data-rated="${data.rated===true}"
+data-skipped="${data.ratingSkipped===true}">
 
-${getActionText(data.workflowStatus)}
+${getActionText(
+data.workflowStatus,
+data.rated,
+data.ratingSkipped
+)}
 
 </button>
 
@@ -177,7 +183,11 @@ status
 
 }
 
-function getActionText(status){
+function getActionText(
+status,
+rated,
+ratingSkipped
+){
 
 switch(status){
 
@@ -197,9 +207,20 @@ case "payment_confirmed":
 return "✅ Menunggu Penyelesaian";
 
 case "completed":
+
+if(
+rated===true ||
+ratingSkipped===true
+){
+
+return "📄 Lihat Riwayat";
+
+}
+
 return "⭐ Beri Penilaian";
 
 default:
+
 return "📄 Lihat Detail";
 
 }
