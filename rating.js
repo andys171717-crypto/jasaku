@@ -516,6 +516,14 @@ ratingRef,
 ratingData
 );
 
+await setDoc(
+doc(db,"requests",requestId),
+{
+...requestData,
+rated:true
+}
+);
+
 showSuccess();
 
 }catch(err){
@@ -528,9 +536,37 @@ alert("Gagal mengirim penilaian.");
 
 }
 
-function skipRating(){
+async function skipRating(){
+
+try{
+
+await setDoc(
+
+doc(
+db,
+"requests",
+requestId
+),
+
+{
+
+...requestData,
+
+ratingSkipped:true
+
+}
+
+);
 
 showSuccess();
+
+}catch(err){
+
+console.error(err);
+
+alert(err.message);
+
+}
 
 }
 
